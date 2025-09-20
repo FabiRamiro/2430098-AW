@@ -1,15 +1,260 @@
+/* Estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
 
-h2 {
-    color: #0021df;
+/* Estilos del Header */
+.header {
+    background: linear-gradient(135deg, #7c00e2, #560088);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-h3 {
-    color: #002088;
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
-p {
+.header h3 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #e0e0e0;
+}
+
+/* Estilos del contenedor del encabezado */
+.container {
+    display: flex;
+    /* border: 1px solid #24005f; */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    height: 200px;
+    max-height: 4000px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    gap: 2rem;
+}
+
+.info {
+    flex: 1;
+}
+
+.info p {
+    font-size: 1.1rem;
     color: #290075;
+}
+
+.image {
+    flex: 0 0 200px;
+}
+
+.image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Diseño de los botones de navegación */
+.navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.nav-btn {
+    background: #560088;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Agregar el efecto de navegación con :target */
+.card-main:target {
+    animation: highlight 2s ease;
+}
+
+@keyframes highlight {
+    0% {
+        background-color: #fff3cd;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
+/* Poner el contenido en dos columnas */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Para los estilos de las tarjetas */
+.card-main {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+/* Para ocultar los botones de checkboxes */
+.card-checkbox {
+    display: none;
+}
+
+/* Para los estilos del header de la tarjeta */
+.card-header {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #dee2e6;
+    user-select: none;
+}
+
+.card-header:hover {
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+}
+
+.card-header h2 {
+    color: #5600df;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+/* Para el contenido de las tarjetas que estara oculto hasta no marcar el checkbox */
+.card-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* Cuando el checkbox está marcado, mostrar el contenido */
+.card-checkbox:checked+.card-header+.card-content {
+    max-height: 2000px;
+}
+
+.card-text {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.card-text:last-child {
+    border-bottom: none;
+}
+
+.card-text h3 {
+    color: #002088;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+.card-text p {
+    color: #290075;
+    margin-bottom: 0.5rem;
+}
+
+.card-text ol {
+    color: #290075;
+    padding-left: 1.5rem;
+}
+
+.card-text li {
+    margin-bottom: 0.5rem;
+}
+
+/* Para hacerlo responsive */
+@media (max-width: 968px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .navigation {
+        padding: 1rem;
+    }
+
+    .nav-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 1.5rem;
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .main-content {
+        padding: 0 1rem;
+    }
+
+    .card-header {
+        padding: 1rem;
+    }
+
+    .card-text {
+        padding: 1rem;
+    }
+
+    .navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-btn {
+        width: 80%;
+        max-width: 300px;
+    }
 }

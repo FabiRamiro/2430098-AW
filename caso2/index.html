@@ -7,6 +7,7 @@
     <title>PRACTICA 2 - FUNDAMENTOS DE JS</title>
   </head>
   <body>
+    <!-- Header con la informacion de encabezado -->
     <header>
       <div class="header">
         <h1>PRACTICA 2</h1>
@@ -14,329 +15,411 @@
       </div>
     </header>
 
+    <!-- Contenedor de la bienvenida a la página -->
     <div class="container">
-      <div class="info">
-        <p>
-          En esta pagina web se vera que es JavaScript, sus fundamentos,
-          caracteristicas principales
-        </p>
-      </div>
       <div class="image">
         <img src="img/logo.png" alt="logo de JavaScript" />
       </div>
+      <div class="info">
+        <p>
+          En esta página web se verá que es JavaScript, sus fundamentos,
+          características principales
+        </p>
+      </div>
     </div>
 
-    <div class="card-group">
-      <div class="card-main">
-        <h2>Introducción y Contexto</h2>
-        <div class="card-text">
-          <h3>
-            ¿Qué es JavaScript y cuáles son sus principales usos en la web?
-          </h3>
-          <p>
-            JavaScript es un lenguaje de programación que se ejecuta en el
-            navegador del cliente. Su principal función es hacer que las páginas
-            web sean interactivas y dinámicas, permitiendo actualizar contenido
-            sin recargar la página, crear animaciones, validar formularios y
-            construir aplicaciones web complejas de una sola página.
-          </p>
+    <!-- Botones para navegar entre los temas-->
+    <nav class="navigation">
+      <a href="#introduccion" class="nav-btn">Introducción y Contexto</a>
+      <a href="#fundamentos" class="nav-btn">Fundamentos del Lenguaje</a>
+      <a href="#control-flujo" class="nav-btn">Control de Flujo</a>
+      <a href="#funciones" class="nav-btn">Funciones</a>
+      <a href="#objetos" class="nav-btn">Objetos y Colecciones</a>
+      <a href="#otros-temas" class="nav-btn">Otros Temas</a>
+    </nav>
+
+    <!-- Div para tener el contenido en dos columnas -->
+    <div class="main-content">
+      <!-- Div de la columna 1 -->
+      <div class="column">
+        <div class="card-main" id="introduccion">
+          <input
+            type="checkbox"
+            id="introduccion-checkbox"
+            class="card-checkbox"
+          />
+          <label for="introduccion-checkbox" class="card-header">
+            <h2>Introducción y Contexto</h2>
+          </label>
+          <div class="card-content">
+            <div class="card-text">
+              <h3>
+                ¿Qué es JavaScript y cuáles son sus principales usos en la web?
+              </h3>
+              <p>
+                JavaScript es un lenguaje de programación que se ejecuta en el
+                navegador del cliente. Su principal función es hacer que las
+                páginas web sean interactivas y dinámicas, permitiendo
+                actualizar contenido sin recargar la página, crear animaciones,
+                validar formularios y construir aplicaciones web complejas de
+                una sola página.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>¿En qué año y con qué propósito se creó JavaScript?</h3>
+              <p>
+                JavaScript fue creado en 1995 por Brendan Eich en Netscape. El
+                propósito original era proporcionar una forma sencilla de añadir
+                interactividad a las páginas web, complementando a HTML y CSS,
+                que en ese momento eran tecnologías principalmente estáticas.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>¿Por qué JavaScript no es lo mismo que Java?</h3>
+              <p>
+                JavaScript no es lo mismo que Java a pesar del nombre es porque
+                Java es un lenguaje compilado, fuertemente tipado y orientado a
+                objetos que se usa principalmente para aplicaciones de servidor
+                y mobile, por su parte JavaScript es un lenguaje interpretado,
+                de tipado dinámico y multiparadigma, enfocado en el desarrollo
+                web y que se ejecuta en el navegador.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>¿Cómo se complementa JavaScript con HTML y CSS?</h3>
+              <p>
+                HTML, CSS y JavaScript se complementan ya que son fundamentales
+                para la web, HTML se encarga de la estructura y el contenido, el
+                CSS se ocupa del estilo visual, y JavaScript añado la
+                interactividad y el comportamiento dinámico.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="card-text">
-          <h3>¿En qué año y con qué propósito se creó JavaScript?</h3>
-          <p>
-            JavaScript fue creado en 1995 por Brendan Eich en Netscape. El
-            propósito original era proporcionar una forma sencilla de añadir
-            interactividad a las páginas web, complementando a HTML y CSS, que
-            en ese momento eran tecnologías principalmente estáticas.
-          </p>
+
+        <div class="card-main" id="control-flujo">
+          <input
+            type="checkbox"
+            id="control-flujo-checkbox"
+            class="card-checkbox"
+          />
+          <label for="control-flujo-checkbox" class="card-header">
+            <h2>Control de Flujo</h2>
+          </label>
+          <div class="card-content">
+            <div class="card-text">
+              <h3>
+                ¿Cómo funcionan las sentencias condicionales if, else y switch?
+              </h3>
+              <p>
+                Las sentencias condicionales lo que hacen es controlar qué
+                bloque de código se ejecuta, en este caso "if" ejecuta un bloque
+                si una condición es verdadera, "else" ejecuta un bloque
+                alternativo si la condición de "if" es falsa, "switch" evalúa
+                una expresión y ejecuta el bloque de código (case) que coincia
+                con su valor, siendo una alternativa más limpia a múltiples "if/
+                else if".
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Cuáles son las diferencias entre los bucles for, while y do...
+                while?
+              </h3>
+              <p>
+                Aunque todos repiten un bloque de código se diferencian en que
+                el bucle "for" es ideal cuando se conoce el número de
+                iteraciones, el bucle "while" se ejecuta mientras una condición
+                sea verdadera, evaluándola antes de cada iteración, el blucle
+                "do... while" es similar, pero evalúa la condición después de
+                cada iteración, garantizando que el bloque se ejecute por lo
+                menos una vez.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>¿Para qué sirven las plabras clave break y continue?</h3>
+              <p>
+                Dentro de un bucle, el "break" se usa para terminar y salir del
+                bucle inmediatamente, sin importar si la condición se ha
+                cumplido y "continue" se utiliza para saltar la iteración actual
+                y pasar directamente a la siguiente iteración del bucle.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="card-text">
-          <h3>¿Por qué JavaScript no es lo mismo que Java?</h3>
-          <p>
-            JavaScript no es lo mismo que Java a pesar del nombre es porque Java
-            es un lenguaje compilado, fuertemente tipado y orientado a objetos
-            que se usa principalmente para aplicaciones de servidor y mobile,
-            por su parte JavaScript es un lenguaje interpretado, de tipado
-            dinámico y multiparadigma, enfocado en el desarrollo web y que se
-            ejecuta en el navegador.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>¿Cómo se complementa JavaScript con HTML y CSS?</h3>
-          <p>
-            HTML, CSS y JavaScript se complementan ya que son fundamentales para
-            la web, HTML se encarga de la estructura y el contenido, el CSS se
-            ocupa del estilo visual, y JavaScript añado la interactividad y el
-            comportamiento dinámico.
-          </p>
+
+        <div class="card-main" id="objetos">
+          <input type="checkbox" id="objetos-checkbox" class="card-checkbox" />
+          <label for="objetos-checkbox" class="card-header">
+            <h2>Objetos y Colecciones</h2>
+          </label>
+          <div class="card-content">
+            <div class="card-text">
+              <h3>
+                ¿Cómo se declara un objeto y cómo se accede a sus propiedades?
+              </h3>
+              <p>
+                Un objeto se declara usando llaves {} con pares de "clave:
+                valor" (const persona = { nombre: 'Ana', edad: 30};). Se puede
+                acceder a las propiedades de estos mediante la notación de punto
+                (persona.nombre) o la notación de corchetes (persona['nombre']),
+                siendo esta última útil para claves dinámicas.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Qué diferencia hay entre una propiedad y un método en un
+                objeto?
+              </h3>
+              <p>
+                Una propiedad es un valor asociado a una clave en un objeto, asi
+                mismo un método es una propiedad cuyo valor es una función, lo
+                que permite al objeto realizar acciones.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                3 métodos básicos de los arrays, su explicacion y cómo
+                funcionan.
+              </h3>
+              <ol>
+                <li>push(): Añade uno o más elementos al final de un array.</li>
+                <li>
+                  pop(): Elimina el último elemento de un array y lo devuelve.
+                </li>
+                <li>
+                  map(): Crea un nuevo array aplicando una función a cada uno de
+                  los elementos del array original, sin modificarlo
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="card-main">
-        <h2>Fundamentos del Lenguaje</h2>
-        <div class="card-text">
-          <h3>
-            ¿Cuál es la sintaxis básica de JavaScript y cómo se escriben
-            comentarios?
-          </h3>
-          <p>
-            incluye declaraciones (sentencias) que terminan en punto y coma (;),
-            bloques de código delimitados por llaves ({}), y es sensible a
-            mayúsculas y minúsculas. Se usan palabras clave como let, const y
-            var para declarar variables, operadores similares a C/Java. Los
-            comentarios se escriben de dos formas: para un comentario de una
-            sola linea se usa // comentario, y para comentario de bloque se usa
-            /* comentario */.
-          </p>
+      <!-- Div de la columna 2 -->
+      <div class="column">
+        <div class="card-main" id="fundamentos">
+          <input
+            type="checkbox"
+            id="fundamentos-checkbox"
+            class="card-checkbox"
+          />
+          <label for="fundamentos-checkbox" class="card-header">
+            <h2>Fundamentos del Lenguaje</h2>
+          </label>
+          <div class="card-content">
+            <div class="card-text">
+              <h3>
+                ¿Cuál es la sintaxis básica de JavaScript y cómo se escriben
+                comentarios?
+              </h3>
+              <p>
+                incluye declaraciones (sentencias) que terminan en punto y coma
+                (;), bloques de código delimitados por llaves ({}), y es
+                sensible a mayúsculas y minúsculas. Se usan palabras clave como
+                let, const y var para declarar variables, operadores similares a
+                C/Java. Los comentarios se escriben de dos formas: para un
+                comentario de una sola linea se usa // comentario, y para
+                comentario de bloque se usa /* comentario */.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>¿Qué diferencias hay entre var, let y const?</h3>
+              <p>
+                La principal diferencia es en el scope (alcance) y la
+                mutabilidad, es decir que var tiene un alcance de función y
+                puede ser redeclarada y reasignada mientras que let y const
+                tienen un alcance de bloque (limitado a {}) y let permitiendo
+                reasignar su valor, mientras que const es una constante cuyo
+                valor no puede ser reasignado.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Cuáles son los <b>tipos de datos primitivos</b> en JavaScript?
+              </h3>
+              <p>Los tipos de datos primitivos son:</p>
+              <ol>
+                <li>string: para texto. Ejemplo: "Hola mundo"</li>
+                <li>number: para valores numéricos. Ejemplo: 7</li>
+                <li>boolean: para valores de verdad o falso. Ejemplo: true</li>
+                <li>
+                  null: representa la ausencia intencional de un valor. Ejemplo:
+                  null
+                </li>
+                <li>
+                  undefined: indica que una variable no ha sido asignada.
+                  Ejemplo: undefined
+                </li>
+                <li>
+                  symbol: para crear identificadores únicos. Ejemplo:
+                  Symbol('id')
+                </li>
+                <li>
+                  bigint: para números enteros muy grandes. Ejemplo:
+                  9007318231838123n
+                </li>
+              </ol>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Qué diferencia hay entre un array y un objeto en JavaScript?
+              </h3>
+              <p>
+                Un array viene siendo una colección ordenada de valores a los
+                que se accede mediante un indice numérico que se empieza desde
+                0. Un objeto es una colección no ordenada de pares clave-valor
+                (propiedades) donde cada valor se accede mediante su clave (un
+                string).
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Qué son y cómo se usan los operadores aritméticos, lógicos y
+                relacionales?
+              </h3>
+              <p>
+                Los operadores son símbolos que realizan operaciones. En este
+                caso los aritméticos (+, -, *) se usan para cálculos
+                matemáticos, los lógicos (&&, ||, !) combinan o invierten
+                valores booleanos, los relacionales (>, <, ==, ===) comparan dos
+                valores y devuelven un booleano.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="card-text">
-          <h3>¿Qué diferencias hay entre var, let y const?</h3>
-          <p>
-            La principal diferencia es en el scope (alcance) y la mutabilidad,
-            es decir que var tiene un alcance de función y puede ser redeclarada
-            y reasignada mientras que let y const tienen un alcance de bloque
-            (limitado a {}) y let permitiendo reasignar su valor, mientras que
-            const es una constante cuyo valor no puede ser reasignado.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>
-            ¿Cuáles son los <b>tipos de datos primitivos</b> en JavaScript?
-          </h3>
-          <p>Los tipos de datos primitivos son:</p>
-          <ol>
-            <li>string: para texto. Ejemplo: "Hola mundo"</li>
-            <li>number: para valores numéricos. Ejemplo: 7</li>
-            <li>boolean: para valores de verdad o falso. Ejemplo: true</li>
-            <li>
-              null: representa la ausencia intencional de un valor. Ejemplo:
-              null
-            </li>
-            <li>
-              undefined: indica que una variable no ha sido asignada. Ejemplo:
-              undefined
-            </li>
-            <li>
-              symbol: para crear identificadores únicos. Ejemplo: Symbol('id')
-            </li>
-            <li>
-              bigint: para números enteros muy grandes. Ejemplo:
-              9007318231838123n
-            </li>
-          </ol>
-        </div>
-        <div class="card-text">
-          <h3>¿Qué diferencia hay entre un array y un objeto en JavaScript?</h3>
-          <p>
-            Un array viene siendo una colección ordenada de valores a los que se
-            accede mediante un indice numérico que se empieza desde 0. Un objeto
-            es una colección no ordenada de pares clave-valor (propiedades)
-            donde cada valor se accede mediante su clave (un string).
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>
-            ¿Qué son y cómo se usan los operadores aritméticos, lógicos y
-            relacionales?
-          </h3>
-          <p>
-            Los operadores son símboles que realizan operaciones. En este caso
-            los aritméticos (+, -, *) se usan para cálculos matemáticos, los
-            lógicos (&&, ||, !) combinan o invierten valores booleanos, los
-            relacionales (>, <, ==, ===) comparan dos valores y devuelven un
-            booleano.
-          </p>
-        </div>
-      </div>
 
-      <div class="card-main">
-        <h2>Control de Flujo</h2>
-        <div class="card-text">
-          <h3>
-            ¿Cómo funcionan las sentencias condicionales if, else y switch?
-          </h3>
-          <p>
-            Las sentencias condicionales lo que hacen es controlar qué bloque de
-            código se ejecuta, en este caso "if" ejecuta un bloque si una
-            condición es verdadera, "else" ejecuta un bloque alternativo si la
-            condición de "if" es falsa, "switch" evalúa una expresión y ejecuta
-            el bloque de código (case) que coincia con su valor, siendo una
-            alternativa más limpia a múltiples "if/ else if".
-          </p>
+        <div class="card-main" id="funciones">
+          <input
+            type="checkbox"
+            id="funciones-checkbox"
+            class="card-checkbox"
+          />
+          <label for="funciones-checkbox" class="card-header">
+            <h2>Funciones</h2>
+          </label>
+          <div class="card-content">
+            <div class="card-text">
+              <h3>
+                ¿Cómo se declara una función y cómo se llama en JavaScript?
+              </h3>
+              <p>
+                Una función se puede declarar usando la palabra clave
+                "function", seguida de un nombre, paréntesis y llaves: "function
+                holamundo() {console.log('Hola Mundo'); }" en la que para
+                ejecutarla, simpllemente se llama por su nombre seguido de
+                paréntesis: holamundo();.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Qué significa que una función tenga parámetros y un valor de
+                retorno?
+              </h3>
+              <p>
+                Los parámetros son variables que una función recibe como entrada
+                para trabajar con ellas. El valor de retorno, especificado con
+                la palabra clave "return", es el resultado que la función
+                devuelve al código que la llama, esto haciendo que el resultado
+                de la función sea utilizado en otras partes del programa.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>¿Qué son las funciones flecha (=>) y qué ventajas tienen?</h3>
+              <p>
+                Las funciones flecha son una sintaxis mas corta para escribir
+                funciones. Su principal ventaja, además de ser más cortas, es
+                que no tienen su propio "this", sino que lo heredan del contexto
+                que los rodea asi solucionando muchos problemas de scope comunes
+                en JavaScript.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Qué es el scope en JavaScript y cómo afecta a las variables?
+              </h3>
+              <p>
+                El scope (o alcance) es el conetexto en el que las variables son
+                declaradas y accesibles. Define cuales variables pueden ser
+                usadas en cada parte del código, una variable declarada en el
+                "scope global" es accesible desde cualquier lugar, mientras que
+                una declarada dentro de una función o bloque solo es accesible
+                dentro de ese espacio.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="card-text">
-          <h3>
-            ¿Cuáles son las diferencias entre los bucles for, while y do...
-            while?
-          </h3>
-          <p>
-            Aunque todos repiten un bloque de código se diferencian en que el
-            bucle "for" es ideal cuando se conoce el número de iteraciones, el
-            bucle "while" se ejecuta mientras una condición sea verdadera,
-            evaluándola antes de cada iteración, el blucle "do... while" es
-            similar, pero evalúa la condición después de cada iteración,
-            garantizando que el bloque se ejecute por lo menos una vez.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>¿Para qué sirven las plabras clave break y continue?</h3>
-          <p>
-            Dentro de un bucle, el "break" se usa para terminar y salir del
-            bucle inmediatamente, sin importar si la condición se ha cumplido y
-            "continue" se utiliza para saltar la iteración actual y pasar
-            directamente a la siguiente iteración del bucle.
-          </p>
-        </div>
-      </div>
 
-      <div class="card-main">
-        <h2>Funciones</h2>
-        <div class="card-text">
-          <h3>¿Cómo se declara una función y cómo se llama en JavaScript?</h3>
-          <p>
-            Una función se puede declarar usando la palabra clave "function",
-            seguida de un nombre, paréntesis y llaves: "function holamundo()
-            {console.log('Hola Mundo'); }" en la que para ejecutarla,
-            simpllemente se llama por su nombre seguido de paréntesis:
-            holamundo();.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>
-            ¿Qué significa que una función tenga parámetros y un valor de
-            retorno?
-          </h3>
-          <p>
-            Los parámetros son variables que una función recibe como entrada
-            para trabajar con ellas. El valor de retorno, especificado con la
-            palabra clave "return", es el resultado que la función devuelve al
-            código que la llama, esto haciendo que el resultado de la función
-            sea utilizado en otras partes del programa.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>¿Qué son las funciones flecha (=>) y qué ventajas tienen?</h3>
-          <p>
-            Las funciones flecha son una sintaxis mas corta para escribir
-            funciones. Su principal ventaja, además de ser más cortas, es que no
-            tienen su propio "this", sino que lo heredan del contexto que los
-            rodea asi solucionando muchos problemas de scope comunes en
-            JavaScript.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>¿Qué es el scope en JavaScript y cómo afecta a las variables?</h3>
-          <p>
-            El scope (o alcance) es el conetexto en el que las variables son
-            declaradas y accesibles. Define cuales variables pueden ser usadas
-            en cada parte del código, una variable declarada en el "scope
-            global" es accesible desde cualquier lugar, mientras que una
-            declarada dentro de una función o bloque solo es accesible dentro de
-            ese espacio.
-          </p>
-        </div>
-      </div>
-
-      <div class="card-main">
-        <h2>Objetos y Colecciones</h2>
-        <div class="card-text">
-          <h3>
-            ¿Cómo se declara un objeto y cómo se accede a sus propiedades?
-          </h3>
-          <p>
-            Un objeto se declara usando llaves {} con pares de "clave: valor"
-            (const persona = { nombre: 'Ana', edad: 30};). Se puede acceder a
-            las propiedades de estos mediante la notación de punto
-            (persona.nombre) o la notación de corchetes (persona['nombre']),
-            siendo esta última útil para claves dinámicas.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>
-            ¿Qué diferencia hay entre una propiedad y un método en un objeto?
-          </h3>
-          <p>
-            Una propiedad es un valor asociado a una clave en un objeto, asi
-            mismo un método es una propiedad cuyo valor es una función, lo que
-            permite al objeto realizar acciones.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>
-            3 métodos básicos de los arrays, su explicacion y cómo funcionan.
-          </h3>
-          <ol>
-            <li>push(): Añade uno o más elementos al final de un array.</li>
-            <li>
-              pop(): Elimina el último elemento de un array y lo devuelve.
-            </li>
-            <li>
-              map(): Crea un nuevo array aplicando una función a cada uno de los
-              elementos del array original, sin modificarlo
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="card-main">
-        <h2>Otros temas básicos</h2>
-        <div class="card-text">
-          <h3>
-            ¿Qué es el DOM y por qué es importante en el uso de JavaScript en
-            páginas web?
-          </h3>
-          <p>
-            El DOM (Document Object Model) viene siendo la representación en
-            fomra de árbol de todos los elementos de una ppágina HTML, siendo
-            crucia porque actúa como un puente que permite a JavaScript
-            interactuar con e contenido de la página, como leer elementos,
-            cambiar sus estilos, añadir o eliminar contenido, y responder a las
-            acciones del usuario.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>¿Qué es un evento en JavaScript? Con 3 ejemplos comunes</h3>
-          <p>
-            Un evento es lo que viene siendo una acción que sucede en la página
-            web a la que JS puede "escuhar" y responder, es decir que estos
-            eventos suelen ser interacciones del usuarios. Sus ejemplos comunes
-            son:
-          </p>
-          <ol>
-            <li>click: Cuando el usuario hace clic en un elemento.</li>
-            <li>keydown: Cuando el usuario presiona una tecla.</li>
-            <li>
-              mouseover: Cuando el puntero del ratón pasa por encima de un
-              elemento.
-            </li>
-          </ol>
-        </div>
-        <div class="card-text">
-          <h3>¿Cuál es la diferencia entre alert, prompt y console.log?</h3>
-          <p>
-            En este caso "alert()" muestra una ventana emergente con un mensaje
-            al usuario, haciendo que se detenga la ejecución hasta que se
-            acepta, en lo que "prompt()" también muestra una veenta emergente,
-            pero incluye un campo para que el usuario introduzca texte y
-            "console.log()" es una herramienta para desarrolladores que imprime
-            información en consola del navegador sin interrumpir ni ser visible
-            para el usuario final.
-          </p>
-        </div>
-        <div class="card-text">
-          <h3>
-            ¿Cómo se abre la consola del navegador y qué ventajas tiene usarla
-            para depurar código?
-          </h3>
-          <p>
-            La consola del navegador se abre con la tecla "F12" o haciendo clic
-            derecho en la página y seleccionando "Inspeccionar" y luego la
-            pestaña "Consola", esta tiene como ventajas para depurar permitir
-            ver mensajes de error, imprimir el valor de las variables en
-            cualquier punto del código usando "console.log", y ejecutar comando
-            de JavaScript en tiempo real para probar funciones o inspeccionar el
-            estado de la aplicación.
-          </p>
+        <div class="card-main" id="otros-temas">
+          <input
+            type="checkbox"
+            id="otros-temas-checkbox"
+            class="card-checkbox"
+          />
+          <label for="otros-temas-checkbox" class="card-header">
+            <h2>Otros temas básicos</h2>
+          </label>
+          <div class="card-content">
+            <div class="card-text">
+              <h3>
+                ¿Qué es el DOM y por qué es importante en el uso de JavaScript
+                en páginas web?
+              </h3>
+              <p>
+                El DOM (Document Object Model) viene siendo la representación en
+                fomra de árbol de todos los elementos de una ppágina HTML,
+                siendo crucia porque actúa como un puente que permite a
+                JavaScript interactuar con e contenido de la página, como leer
+                elementos, cambiar sus estilos, añadir o eliminar contenido, y
+                responder a las acciones del usuario.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>¿Qué es un evento en JavaScript? Con 3 ejemplos comunes</h3>
+              <p>
+                Un evento es lo que viene siendo una acción que sucede en la
+                página web a la que JS puede "escuhar" y responder, es decir que
+                estos eventos suelen ser interacciones del usuarios. Sus
+                ejemplos comunes son:
+              </p>
+              <ol>
+                <li>click: Cuando el usuario hace clic en un elemento.</li>
+                <li>keydown: Cuando el usuario presiona una tecla.</li>
+                <li>
+                  mouseover: Cuando el puntero del ratón pasa por encima de un
+                  elemento.
+                </li>
+              </ol>
+            </div>
+            <div class="card-text">
+              <h3>¿Cuál es la diferencia entre alert, prompt y console.log?</h3>
+              <p>
+                En este caso "alert()" muestra una ventana emergente con un
+                mensaje al usuario, haciendo que se detenga la ejecución hasta
+                que se acepta, en lo que "prompt()" también muestra una veenta
+                emergente, pero incluye un campo para que el usuario introduzca
+                texte y "console.log()" es una herramienta para desarrolladores
+                que imprime información en consola del navegador sin interrumpir
+                ni ser visible para el usuario final.
+              </p>
+            </div>
+            <div class="card-text">
+              <h3>
+                ¿Cómo se abre la consola del navegador y qué ventajas tiene
+                usarla para depurar código?
+              </h3>
+              <p>
+                La consola del navegador se abre con la tecla "F12" o haciendo
+                clic derecho en la página y seleccionando "Inspeccionar" y luego
+                la pestaña "Consola", esta tiene como ventajas para depurar
+                permitir ver mensajes de error, imprimir el valor de las
+                variables en cualquier punto del código usando "console.log", y
+                ejecutar comando de JavaScript en tiempo real para probar
+                funciones o inspeccionar el estado de la aplicación.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
