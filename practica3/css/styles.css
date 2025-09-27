@@ -1,0 +1,199 @@
+body {
+    font-family: 'Roboto', 'Montserrat', 'Segoe UI', sans-serif;
+    background: #181024;
+    color: #f3e6fa;
+    min-height: 100vh;
+}
+
+/* Sombra y bordes para las tarjetas */
+.card {
+    background: #2d0036;
+    color: #f3e6fa;
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(120, 0, 120, 0.18);
+}
+
+.card .card-header {
+    text-align: center;
+    padding: 18px 10px 10px 10px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    background: #a800ff;
+    color: #fff;
+}
+
+.form-control::focus {
+    color: #a800ff;
+}
+
+.form-control::placeholder {
+    color: #b37adf;
+}
+
+/* Estilo para los campos de formulario */
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid #a800ff;
+    background: #1a0022;
+    color: #f3e6fa;
+    transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.18rem rgba(255, 0, 106, 0.18);
+    border-color: #ff006a;
+}
+
+/* Estilo para los botones */
+.btn-primary {
+    background: #a800ff;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(168, 0, 255, 0.12);
+}
+
+.btn-primary:hover {
+    background: #ff006a;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #23232b;
+    border: none;
+    color: #f3e6fa;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #3a003a;
+    color: #fff;
+}
+
+/* Botón de Editar */
+.btn-warning {
+    background: #ff006a;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+}
+
+.btn-warning:hover {
+    background: #a800ff;
+    color: #fff;
+}
+
+/* Botón de Eliminar */
+.btn-danger {
+    background: #ff1a4a;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+}
+
+.btn-danger:hover {
+    background: #ff006a;
+    color: #fff;
+}
+
+
+/* Espaciado en el cuerpo de las cards */
+.card-body {
+    padding: 2.2rem;
+}
+
+/* Cambiar el color del texto de el encabezado de la tabla */
+#alumnosTable>thead {
+    color: #ffb3fa;
+    background: #181024;
+}
+
+/* Estilo para el botón de la página activa */
+.page-item.active .page-link {
+    background: #a800ff;
+    border: none;
+    color: #fff;
+}
+
+/* Estilo para los botones de paginación */
+.page-link:hover {
+    background: #2d0036;
+    color: #ffb3fa;
+}
+
+/* Color de los botones de paginación normales */
+.page-link {
+    color: #ffb3fa;
+    background: #1a0022;
+    border: none;
+}
+
+.dt-search input:focus {
+    box-shadow: 0 0 0 0.18rem rgba(255, 0, 106, 0.18);
+    border-color: #ff006a;
+}
+
+.modal-content {
+    border-radius: 16px;
+    background: #2d0036;
+    color: #f3e6fa;
+    border: none;
+}
+
+
+.modal-body.text-dark,
+.modal-title.text-dark {
+    color: #ffb3fa !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #a800ff44;
+}
+
+/* Estilo para los encabezados de modal de confirmación/eliminación */
+.modal-header.bg-warning,
+.modal-header.bg-warning,
+.modal-header.bg-warning.text-white,
+.modal-header.bg-warning.text-dark {
+    background-color: #ff006a !important;
+    background: #ff006a !important;
+    color: #fff !important;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.modal-header.bg-danger {
+    background: #ff1a4a !important;
+    color: #fff !important;
+}
+
+#modalConfirmarCambiosLabel {
+    color: #fff !important;
+}
+
+/* Estilo para el botón de cerrar en el modal */
+.modal-header .btn-close {
+    filter: invert(1) brightness(2);
+}
+
+.modal-header.bg-warning .btn-close {
+    filter: invert(1) brightness(2);
+}
+
+/* Bordes y hover para tabla */
+#alumnosTable {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1a0022;
+}
+
+#alumnosTable tbody tr {
+    transition: background 0.2s;
+}
+
+#alumnosTable tbody tr:hover {
+    background: #2d0036;
+}
