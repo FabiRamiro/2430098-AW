@@ -5,6 +5,15 @@ body {
     min-height: 100vh;
 }
 
+h1 {
+    padding-top: 30px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
 /* Sombra y bordes para las tarjetas */
 .card {
     background: #2d0036;
