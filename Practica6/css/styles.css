@@ -1,0 +1,52 @@
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.btn-primary:hover {
+    background-color: #5568d3;
+    border-color: #5568d3;
+}
+
+a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+    color: #333;
+}
+
+.text-primary {
+    color: #667eea !important;
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+    /* Espacio entre los botones */
+    margin-top: 10px;
+}
+
+.task-actions .btn {
+    padding: 0.25rem 0.5rem;
+    /* Botones un poco más pequeños */
+    font-size: 0.8rem;
+}

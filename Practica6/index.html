@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DASHBOARD</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row min-vh-100">
+        <!-- Barra lateral para proyectos -->
+        <div class="col-md-3 bg-light p-4">
+          <h3 class="mb-4">Mis Proyectos</h3>
+
+          <!-- Botón para agregar proyecto -->
+          <button
+            class="btn btn-success w-100 mb-3"
+            data-bs-toggle="modal"
+            data-bs-target="#modalProyecto"
+          >
+            + Nuevo Proyecto
+          </button>
+
+          <!-- Lista de proyectos -->
+          <div id="listaProyectos" class="list-group"></div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="col-md-9 p-4">
+          <div class="text-end mb-3">
+            <span class="me-3"
+              >Bienvenido(a):
+              <strong id="correoUsuario" class="text-primary"></strong
+            ></span>
+            <button id="btnCerrarSesion" class="btn btn-danger btn-sm">
+              Cerrar Sesión
+            </button>
+          </div>
+
+          <!-- Información del proyecto seleccionado -->
+          <div id="infoProyecto" class="card mb-4 d-none">
+            <div class="card-body">
+              <h2 id="nombreProyectoActual"></h2>
+              <p id="descripcionProyectoActual" class="text-muted"></p>
+              <div class="row">
+                <div class="col-md-4">
+                  <small
+                    ><strong>Estado:</strong>
+                    <span id="estadoProyectoActual"></span
+                  ></small>
+                </div>
+                <div class="col-md-4">
+                  <small
+                    ><strong>Inicio:</strong> <span id="fechaInicio"></span
+                  ></small>
+                </div>
+                <div class="col-md-4">
+                  <small
+                    ><strong>Fin:</strong> <span id="fechaFin"></span
+                  ></small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón para agregar tarea -->
+          <button
+            id="btnAgregarTarea"
+            class="btn btn-primary mb-3 d-none"
+            data-bs-toggle="modal"
+            data-bs-target="#modalTarea"
+          >
+            + Nueva Tarea
+          </button>
+
+          <!-- Tablero con Drag & Drop -->
+          <div id="tableroTareas" class="row d-none">
+            <!-- Columna PENDIENTE -->
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header bg-warning text-white">
+                  <h5 class="mb-0">Pendientes</h5>
+                </div>
+                <div class="card-body">
+                  <ul
+                    id="listaPendiente"
+                    class="lista-tareas list-unstyled"
+                  ></ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Columna EN PROCESO -->
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header bg-info text-white">
+                  <h5 class="mb-0">En Proceso</h5>
+                </div>
+                <div class="card-body">
+                  <ul
+                    id="listaEnProceso"
+                    class="lista-tareas list-unstyled"
+                  ></ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Columna HECHA -->
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header bg-success text-white">
+                  <h5 class="mb-0">Hechas</h5>
+                </div>
+                <div class="card-body">
+                  <ul id="listaHecha" class="lista-tareas list-unstyled"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mensaje cuando no hay proyecto seleccionado -->
+          <div id="mensajeInicial" class="alert alert-info text-center">
+            Selecciona o crea un proyecto para comenzar
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para crear/editar Proyecto -->
+    <div class="modal fade" id="modalProyecto" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tituloModalProyecto">Nuevo Proyecto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formularioProyecto">
+              <input type="hidden" id="idProyecto" />
+
+              <div class="mb-3">
+                <label for="nombreProyecto" class="form-label"
+                  >Nombre del Proyecto</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombreProyecto"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="descripcionProyecto" class="form-label"
+                  >Descripción</label
+                >
+                <textarea
+                  class="form-control"
+                  id="descripcionProyecto"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="estadoProyecto" class="form-label">Estado</label>
+                <select class="form-select" id="estadoProyecto" required>
+                  <option value="activo">Activo</option>
+                  <option value="pausado">Pausado</option>
+                  <option value="completado">Completado</option>
+                </select>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="fechaInicioProyecto" class="form-label"
+                    >Fecha Inicio</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fechaInicioProyecto"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="fechaFinProyecto" class="form-label"
+                    >Fecha Fin</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fechaFinProyecto"
+                    required
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              id="btnGuardarProyecto"
+              class="btn btn-primary"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para crear/editar Tarea -->
+    <div class="modal fade" id="modalTarea" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tituloModalTarea">Nueva Tarea</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formularioTarea">
+              <input type="hidden" id="idTarea" />
+
+              <div class="mb-3">
+                <label for="tituloTarea" class="form-label"
+                  >Título de la Tarea</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tituloTarea"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="descripcionTarea" class="form-label"
+                  >Descripción</label
+                >
+                <textarea
+                  class="form-control"
+                  id="descripcionTarea"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="estadoTarea" class="form-label">Estado</label>
+                  <select class="form-select" id="estadoTarea" required>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="en_proceso">En Proceso</option>
+                    <option value="hecha">Hecha</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label for="prioridadTarea" class="form-label"
+                    >Prioridad</label
+                  >
+                  <select class="form-select" id="prioridadTarea" required>
+                    <option value="baja">Baja</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <label for="fechaVencimientoTarea" class="form-label"
+                    >Fecha Vencimiento</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="fechaVencimientoTarea"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="asignadoATarea" class="form-label"
+                  >Asignado a (correo)</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="asignadoATarea"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="button" id="btnGuardarTarea" class="btn btn-primary">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
