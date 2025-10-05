@@ -1,104 +1,110 @@
 // Array para almacenar usuarios registrados
 let usuarios = [];
 
-// Funcion para registrar a los usuario
-if (document.getElementById("registerForm")) {
+// Cargamos usuarios existentes
+const usuariosGuardados = localStorage.getItem("usuarios");
+if (usuariosGuardados) {
+  usuarios = JSON.parse(usuariosGuardados);
+}
+
+// ===== REGISTRO DE USUARIOS =====
+if (document.getElementById("formularioRegistro")) {
   document
-    .getElementById("registerForm")
+    .getElementById("formularioRegistro")
     .addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const email = document.getElementById("emailRegister").value;
-      const password = document.getElementById("passwordRegister").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-      const errorMessage = document.getElementById("errorMessage");
-      const successMessage = document.getElementById("successMessage");
+      const correo = document.getElementById("correoRegistro").value;
+      const contrasena = document.getElementById("contrasenaRegistro").value;
+      const confirmarContrasena = document.getElementById(
+        "confirmarContrasena"
+      ).value;
+      const mensajeError = document.getElementById("mensajeError");
+      const mensajeExito = document.getElementById("mensajeExito");
 
       // Limpiamos los mensajes
-      errorMessage.classList.add("d-none");
-      successMessage.classList.add("d-none");
+      mensajeError.classList.add("d-none");
+      mensajeExito.classList.add("d-none");
 
       // Validamos que las contraseñas coincidan
-      if (password !== confirmPassword) {
-        errorMessage.textContent = "Las contraseñas no coinciden";
-        errorMessage.classList.remove("d-none");
+      if (contrasena !== confirmarContrasena) {
+        mensajeError.textContent = "Las contraseñas no coinciden";
+        mensajeError.classList.remove("d-none");
         return;
       }
 
       // Verificamos si el usuario ya existe
-      const usuarioExiste = usuarios.find((u) => u.email === email);
+      const usuarioExiste = usuarios.find((u) => u.correo === correo);
       if (usuarioExiste) {
-        errorMessage.textContent = "El correo ya está registrado";
-        errorMessage.classList.remove("d-none");
+        mensajeError.textContent = "El correo ya está registrado";
+        mensajeError.classList.remove("d-none");
         return;
       }
 
       // Registramos al usuario
-      usuarios.push({ email: email, password: password });
+      usuarios.push({ correo: correo, contrasena: contrasena });
 
       // Guardamos en el localStorage
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-      successMessage.textContent =
-        "Ha sido exitoso si registro, lo redirigiremos al login...";
-      successMessage.classList.remove("d-none");
+      mensajeExito.textContent =
+        "Ha sido exitoso su registro, lo redirigiremos al login...";
+      mensajeExito.classList.remove("d-none");
 
-      // Redirigimos despues de 2 segundos
+      // Redirigimos después de 2 segundos
       setTimeout(() => {
         window.location.href = "login.html";
       }, 2000);
     });
 }
 
-// Funcion para iniciar sesion
-if (document.getElementById("loginForm")) {
-  // Cargamos a los usuarios del localStorage
-  const usuariosGuardados = localStorage.getItem("usuarios");
-  if (usuariosGuardados) {
-    usuarios = JSON.parse(usuariosGuardados);
-  }
+// ===== INICIO DE SESION =====
+if (document.getElementById("formularioLogin")) {
+  document
+    .getElementById("formularioLogin")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  document.getElementById("loginForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+      const correo = document.getElementById("correo").value;
+      const contrasena = document.getElementById("contrasena").value;
+      const mensajeError = document.getElementById("mensajeError");
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const errorMessage = document.getElementById("errorMessage");
+      mensajeError.classList.add("d-none");
 
-    errorMessage.classList.add("d-none");
+      // Buscamos al usuario
+      const usuario = usuarios.find(
+        (u) => u.correo === correo && u.contrasena === contrasena
+      );
 
-    // Buscamos al usuario
-    const usuario = usuarios.find(
-      (u) => u.email === email && u.password === password
-    );
-
-    if (usuario) {
-      // Guardamos la sesion
-      localStorage.setItem("usuarioActivo", email);
-      // Redirigimos a la pagina de bienvenida
-      window.location.href = "index.html";
-    } else {
-      errorMessage.textContent = "Correo o contraseña incorrectos";
-      errorMessage.classList.remove("d-none");
-    }
-  });
+      if (usuario) {
+        // Guardamos la sesión
+        localStorage.setItem("usuarioActivo", correo);
+        // Redirigimos a la página de bienvenida
+        window.location.href = "index.html";
+      } else {
+        mensajeError.textContent = "Correo o contraseña incorrectos";
+        mensajeError.classList.remove("d-none");
+      }
+    });
 }
 
-// La pagina de bienvenida
-if (document.getElementById("userEmail")) {
+// ===== VERIFICACION EN LA BIENVENIDA =====
+if (document.getElementById("correoUsuario")) {
   const usuarioActivo = localStorage.getItem("usuarioActivo");
 
   if (!usuarioActivo) {
-    // Si no hay sesion activa redirigimos al login
+    // Si no hay sesión activa redirigimos al login
     window.location.href = "login.html";
   } else {
     // Mostramos el correo del usuario
-    document.getElementById("userEmail").textContent = usuarioActivo;
+    document.getElementById("correoUsuario").textContent = usuarioActivo;
   }
 
-  // Boton para cerrar sesion
-  document.getElementById("logoutBtn").addEventListener("click", function () {
-    localStorage.removeItem("usuarioActivo");
-    window.location.href = "login.html";
-  });
+  // Botón para cerrar sesión
+  document
+    .getElementById("btnCerrarSesion")
+    .addEventListener("click", function () {
+      localStorage.removeItem("usuarioActivo");
+      window.location.href = "login.html";
+    });
 }

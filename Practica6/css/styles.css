@@ -38,15 +38,132 @@ h3 {
     color: #667eea !important;
 }
 
-.task-actions {
-    display: flex;
-    gap: 10px;
-    /* Espacio entre los botones */
-    margin-top: 10px;
+/* ========================================
+   ESTILOS PARA EL SIDEBAR DE PROYECTOS
+   ======================================== */
+.bg-light {
+    background-color: #f8f9fa !important;
+    border-right: 2px solid #dee2e6;
 }
 
-.task-actions .btn {
+.list-group-item {
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item.active {
+    background-color: #667eea !important;
+    border-color: #667eea !important;
+}
+
+/* ========================================
+   ESTILOS PARA EL TABLERO KANBAN
+   ======================================== */
+.lista-tareas {
+    min-height: 400px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* ========================================
+   ESTILOS PARA LAS TAREAS (TARJETAS)
+   ======================================== */
+.tarea-item {
+    cursor: move;
+    /* Indica que se puede arrastrar */
+    transition: all 0.3s ease;
+    border-left: 4px solid #6c757d;
+    /* Border por defecto */
+    background-color: white;
+}
+
+.tarea-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Borde según prioridad */
+.tarea-item.border-danger {
+    border-left-color: #dc3545 !important;
+}
+
+.tarea-item.border-warning {
+    border-left-color: #ffc107 !important;
+}
+
+.tarea-item.border-secondary {
+    border-left-color: #6c757d !important;
+}
+
+/* ========================================
+   EFECTOS DE DRAG & DROP
+   ======================================== */
+
+/* Cuando se está arrastrando una tarea */
+.arrastrando {
+    opacity: 0.5;
+    background-color: #e9ecef;
+    transform: rotate(5deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto sobre la zona donde se puede soltar */
+.lista-tareas:hover {
+    background-color: #e9ecef;
+    border: 2px dashed #667eea;
+}
+
+/* ========================================
+   BADGES Y ETIQUETAS
+   ======================================== */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+}
+
+/* ========================================
+   BOTONES PEQUEÑOS
+   ======================================== */
+.btn-sm {
     padding: 0.25rem 0.5rem;
-    /* Botones un poco más pequeños */
     font-size: 0.8rem;
+}
+
+/* ========================================
+   INFORMACIÓN DEL PROYECTO
+   ======================================== */
+#infoProyecto {
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   COLUMNAS DEL TABLERO
+   ======================================== */
+.card-header {
+    font-weight: bold;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+/* ========================================
+   RESPONSIVIDAD
+   ======================================== */
+@media (max-width: 768px) {
+    .col-md-3 {
+        border-right: none;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .lista-tareas {
+        min-height: 200px;
+    }
 }
