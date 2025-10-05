@@ -1,142 +1,54 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Verificamos si la sesión es activa
   const usuarioActivo = localStorage.getItem("usuarioActivo");
   if (!usuarioActivo) return;
 
-  // Referenciamos a los elementos del DOM
-  const taskForm = document.getElementById("taskForm");
-  const taskNameInput = document.getElementById("taskName");
-  const taskDescriptionInput = document.getElementById("taskDescription");
-  const taskListContainer = document.getElementById("taskList");
+  // Referencias a elementos de usuario
+  const correoUsuario = document.getElementById("correoUsuario");
+  const btnCerrarSesion = document.getElementById(btnCerrarSesion);
 
-  // Referenciamos a los elementos del modal
-  const editTaskModal = new bootstrap.Modal(
-    document.getElementById("editTaskModal")
+  // Referencias a elementos de los proyectos
+  const listaProyectos = document.getElementById("listaProyectos");
+  const formularioProyecto = document.getElementById("formularioProyecto");
+  const btnGuardarProyecto = document.getElementById("btnGuardarProyecto");
+  const modalProyecto = new bootstrap.Modal(
+    document.getElementById("modalProyecto")
   );
-  const editTaskForm = document.getElementById("editTaskForm");
-  const editTaskIdInput = document.getElementById("editTaskId");
-  const editTaskNameInput = document.getElementById("editTaskName");
-  const editTaskDescriptionInput = document.getElementById(
-    "editTaskDescription"
-  );
-  const saveTaskChangesBtn = document.getElementById("saveTaskChanges");
 
-  // Obtenemos las tares del usuario (desde el localStorage)
-  const obtenerTareas = () => {
-    const tareasGuardadas = localStorage.getItem(`tareas_${usuarioActivo}`);
-    return tareasGuardadas ? JSON.parse(tareasGuardadas) : [];
+  // Elementos de tareas
+  const formularioTarea = document.getElementById("formularioTarea");
+  const btnGuardarTarea = document.getElementById("btnGuardarTarea");
+  const btnAgregarTarea = document.getElementById("btnAgregarTarea");
+  const modalTarea = new bootstrap.Modal(document.getElementById("modalTarea"));
+
+  // Tablero del drag & drop
+  const listaPendiente = document.getElementById("listaPendiente");
+  const listaEnProceso = document.getElementById("listaEnProceso");
+  const listaHecha = document.getElementById("listaHecha");
+
+  // Informacion del proyecto
+  const infoProyecto = document.getElementById("infoProyecto");
+  const tableroTareas = document.getElementById("tableroTareas");
+  const mensajeInicial = document.getElementById("mensajeInicial");
+
+  // Variables globales
+  let proyectoActual = null;
+  let elementosArrastrado = null;
+
+  // === LocalStorage ===
+  // Obtenemos todos los proyectos del usuario actual
+  const obtenerProyectos = () => {
+    const proyectosGuardados = localStorage.getItem(
+      `proyectos_${usuarioActivo}`
+    );
+    return proyectosGuardados ? JSON.parse(proyectosGuardados) : [];
   };
 
-  // Guardamos un arreglo de tareas en localStorage
-  const guardarTareas = (tareas) => {
-    localStorage.setItem(`tareas_${usuarioActivo}`, JSON.stringify(tareas));
+  // Guardamos en el array de proyectos del localStorage
+  const guardarProyectos = (proyectos) => {
+    localStorage.setItem(
+      `proyectos_${usuarioActivo}`,
+      JSON.stringify(proyectos)
+    );
   };
-
-  // Mostramos las tareas en la página
-  const mostrarTareas = () => {
-    taskListContainer.innerHTML = "";
-    const tareas = obtenerTareas();
-
-    if (tareas.length === 0) {
-      taskListContainer.innerHTML =
-        '<p class="text-center text-muted">No tienes tareas asignadas.</p>';
-      return;
-    }
-
-    tareas.forEach((tarea, index) => {
-      const tareaElemento = document.createElement("div");
-      tareaElemento.classList.add("list-group-item");
-      tareaElemento.innerHTML = `
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1 task-name">${tarea.nombre}</h5>
-        </div>
-        <p class="mb-1 task-description">${tarea.descripcion}</p>
-        <div class="task-actions">
-          <button class="btn btn-warning btn-sm edit-btn" data-index="${index}">Editar</button>
-          <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Eliminar</button>
-        </div>
-      `;
-      taskListContainer.appendChild(tareaElemento);
-    });
-  };
-
-  // === Manejo de Eventos ===
-  // Agregar una tarea
-  taskForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const nombreTarea = taskNameInput.value.trim();
-    const descripcionTarea = taskDescriptionInput.value.trim();
-
-    if (nombreTarea === "" || descripcionTarea === "") {
-      alert("Por favor completa todos los campos juechumecha");
-      return;
-    }
-
-    const nuevaTarea = {
-      nombre: nombreTarea,
-      descripcion: descripcionTarea,
-    };
-
-    const tareas = obtenerTareas();
-    tareas.push(nuevaTarea);
-    guardarTareas(tareas);
-
-    taskForm.reset();
-    mostrarTareas();
-  });
-
-  // Editar o eliminar una tarea
-  taskListContainer.addEventListener("click", function (e) {
-    const tareas = obtenerTareas();
-
-    // Se se hizo click en eliminar
-    if (e.target.classList.contains("delete-btn")) {
-      const taskIndex = e.target.getAttribute("data-index");
-
-      // Confirmar antes de eliminar
-      if (confirm("¿De veritas quieres eliminar la tarea perro?")) {
-        tareas.splice(taskIndex, 1); // Eliminamos solo 1 elementos en la posicion del index
-        guardarTareas(tareas);
-        mostrarTareas();
-      }
-    }
-
-    // Si se hizo click en editar
-    if (e.target.classList.contains("edit-btn")) {
-      const taskIndex = e.target.getAttribute("data-index");
-      const tareaAEditar = tareas[taskIndex];
-
-      // Llenamos el modal con los datos de la tarea
-      editTaskIdInput.value = taskIndex;
-      editTaskNameInput.value = tareaAEditar.nombre;
-      editTaskDescriptionInput.value = tareaAEditar.descripcion;
-
-      // Mostramos el modal
-      editTaskModal.show();
-    }
-  });
-
-  // Guardamos los cambios desde el modal
-  saveTaskChangesBtn.addEventListener("click", function () {
-    const taskIndex = editTaskIdInput.value;
-    const nuevoNombre = editTaskNameInput.value.trim();
-    const nuevaDescripcion = editTaskDescriptionInput.value.trim();
-
-    if (nuevoNombre === "" || nuevaDescripcion === "") {
-      alert("Por favor llena todos los campos papu");
-      return;
-    }
-
-    let tareas = obtenerTareas();
-    // Vamos a actualizar la tarea en la posicion correcta
-    tareas[taskIndex].nombre = nuevoNombre;
-    tareas[taskIndex].descripcion = nuevaDescripcion;
-
-    guardarTareas(tareas);
-    mostrarTareas();
-
-    // Ocultamos el modal
-    editTaskModal.hide();
-  });
-
-  mostrarTareas();
 });
