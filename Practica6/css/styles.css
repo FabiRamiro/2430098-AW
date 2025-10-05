@@ -1,49 +1,150 @@
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    font-family: Arial, sans-serif;
+    background-color: #1a1a2e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e0e0e0;
 }
 
 .card {
-    border-radius: 10px;
-    border: none;
+    border-radius: 12px;
+    border: 1px solid #2d2d44;
+    background-color: #16213e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card-body,
+.card-estado,
+.card-inicio,
+.card.fin {
+    color: #fff;
 }
 
 .btn-primary {
-    background-color: #667eea;
-    border-color: #667eea;
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #5568d3;
-    border-color: #5568d3;
+    background-color: #357abd;
+    border-color: #357abd;
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background-color: #50c878;
+    border-color: #50c878;
+}
+
+.btn-success:hover {
+    background-color: #3da05f;
+    border-color: #3da05f;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+    border-color: #f39c12;
+    color: #1a1a2e;
+}
+
+.btn-warning:hover {
+    background-color: #d68910;
+    border-color: #d68910;
+}
+
+.btn-outline-primary {
+    color: #4a90e2;
+    border-color: #4a90e2;
+}
+
+.btn-outline-primary:hover {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    color: #a0a0a0;
+    border-color: #a0a0a0;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #a0a0a0;
+    border-color: #a0a0a0;
+    color: #1a1a2e;
+}
+
+.btn-outline-danger {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.btn-outline-danger:hover {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #fff;
 }
 
 a {
-    color: #667eea;
+    color: #4a90e2;
     text-decoration: none;
 }
 
 a:hover {
-    color: #764ba2;
+    color: #357abd;
     text-decoration: underline;
 }
 
 h1,
 h2,
-h3 {
-    color: #333;
+h3,
+h4,
+h5,
+h6 {
+    color: #f0f0f0;
 }
 
 .text-primary {
-    color: #667eea !important;
+    color: #4a90e2 !important;
 }
 
-/* ========================================
-   ESTILOS PARA EL SIDEBAR DE PROYECTOS
-   ======================================== */
+.text-muted {
+    color: #a0a0a0 !important;
+}
+
+/* Formularios */
+.form-control,
+.form-select {
+    background-color: #0f3460;
+    border: 1px solid #2d2d44;
+    color: #e0e0e0;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #0f3460;
+    border-color: #4a90e2;
+    color: #e0e0e0;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+.form-label {
+    color: #d0d0d0;
+}
+
+/* Sidebar de proyectos */
 .bg-light {
-    background-color: #f8f9fa !important;
-    border-right: 2px solid #dee2e6;
+    background-color: #16213e !important;
+    border-right: 1px solid #2d2d44;
 }
 
 .list-group-item {
@@ -51,116 +152,219 @@ h3 {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    background-color: #0f3460;
+    border: 1px solid #2d2d44;
+    color: #e0e0e0;
 }
 
 .list-group-item:hover {
     transform: translateX(5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2);
+    background-color: #1a4d7a;
 }
 
 .list-group-item.active {
-    background-color: #667eea !important;
-    border-color: #667eea !important;
+    background-color: #4a90e2 !important;
+    border-color: #4a90e2 !important;
+    color: #fff !important;
 }
 
-/* ========================================
-   ESTILOS PARA EL TABLERO KANBAN
-   ======================================== */
+.list-group-item.active h6,
+.list-group-item.active small {
+    color: #fff !important;
+}
+
+/* Botones dentro del proyecto activo */
+.list-group-item.active .btn-outline-primary {
+    color: #fff;
+    border-color: #fff;
+    background-color: transparent;
+}
+
+.list-group-item.active .btn-outline-primary:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #4a90e2;
+}
+
+.list-group-item.active .btn-outline-secondary {
+    color: #fff;
+    border-color: #fff;
+    background-color: transparent;
+}
+
+.list-group-item.active .btn-outline-secondary:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #4a90e2;
+}
+
+.list-group-item.active .btn-outline-danger {
+    color: #fff;
+    border-color: #fff;
+    background-color: transparent;
+}
+
+.list-group-item.active .btn-outline-danger:hover {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #fff;
+}
+
+.list-group-item h6 {
+    color: #f0f0f0;
+}
+
+/* Tablero Kanban */
 .lista-tareas {
     min-height: 400px;
     padding: 10px;
-    background-color: #f8f9fa;
+    background-color: #0f3460;
     border-radius: 8px;
+    border: 1px solid #2d2d44;
 }
 
-/* ========================================
-   ESTILOS PARA LAS TAREAS (TARJETAS)
-   ======================================== */
+/* Tarjetas de tareas */
 .tarea-item {
     cursor: move;
-    /* Indica que se puede arrastrar */
     transition: all 0.3s ease;
     border-left: 4px solid #6c757d;
-    /* Border por defecto */
-    background-color: white;
+    background-color: #16213e;
+    color: #e0e0e0;
 }
 
 .tarea-item:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
     transform: translateY(-2px);
 }
 
-/* Borde según prioridad */
+.tarea-item strong {
+    color: #f0f0f0;
+}
+
+/* Bordes según prioridad */
 .tarea-item.border-danger {
-    border-left-color: #dc3545 !important;
+    border-left-color: #e74c3c !important;
 }
 
 .tarea-item.border-warning {
-    border-left-color: #ffc107 !important;
+    border-left-color: #f39c12 !important;
 }
 
 .tarea-item.border-secondary {
-    border-left-color: #6c757d !important;
+    border-left-color: #a0a0a0 !important;
 }
 
-/* ========================================
-   EFECTOS DE DRAG & DROP
-   ======================================== */
-
-/* Cuando se está arrastrando una tarea */
+/* Efectos del drag & drop */
 .arrastrando {
     opacity: 0.5;
-    background-color: #e9ecef;
-    transform: rotate(5deg);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background-color: #2d2d44;
+    transform: rotate(3deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* Efecto sobre la zona donde se puede soltar */
 .lista-tareas:hover {
-    background-color: #e9ecef;
-    border: 2px dashed #667eea;
+    background-color: #1a4d7a;
+    border: 2px dashed #4a90e2;
 }
 
-/* ========================================
-   BADGES Y ETIQUETAS
-   ======================================== */
+/* Badges */
 .badge {
     font-size: 0.75rem;
     padding: 0.35em 0.65em;
 }
 
-/* ========================================
-   BOTONES PEQUEÑOS
-   ======================================== */
+.bg-success {
+    background-color: #50c878 !important;
+}
+
+.bg-warning {
+    background-color: #f39c12 !important;
+    color: #1a1a2e !important;
+}
+
+.bg-info {
+    background-color: #3498db !important;
+}
+
+.bg-danger {
+    background-color: #e74c3c !important;
+}
+
+.bg-secondary {
+    background-color: #6c757d !important;
+}
+
+/* Botones pequeños */
 .btn-sm {
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
 }
 
-/* ========================================
-   INFORMACIÓN DEL PROYECTO
-   ======================================== */
+/* Información del proyecto */
 #infoProyecto {
-    border-left: 4px solid #667eea;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #4a90e2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* ========================================
-   COLUMNAS DEL TABLERO
-   ======================================== */
+/* Headers de columnas */
 .card-header {
     font-weight: bold;
-    border-top-left-radius: 10px !important;
-    border-top-right-radius: 10px !important;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
 }
 
-/* ========================================
-   RESPONSIVIDAD
-   ======================================== */
+.card-header h5 {
+    margin: 0;
+    color: #fff;
+}
+
+/* Modales */
+.modal-content {
+    background-color: #16213e;
+    border: 1px solid #2d2d44;
+}
+
+.modal-header {
+    border-bottom: 1px solid #2d2d44;
+}
+
+.modal-footer {
+    border-top: 1px solid #2d2d44;
+}
+
+.modal-title {
+    color: #f0f0f0;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+/* Alertas */
+.alert-info {
+    background-color: #0f3460;
+    border-color: #4a90e2;
+    color: #e0e0e0;
+}
+
+.alert-danger {
+    background-color: #3d1f1f;
+    border-color: #e74c3c;
+    color: #ffcccb;
+}
+
+.alert-success {
+    background-color: #1f3d2f;
+    border-color: #50c878;
+    color: #c8ffdb;
+}
+
+/* Responsividad */
 @media (max-width: 768px) {
     .col-md-3 {
         border-right: none;
-        border-bottom: 2px solid #dee2e6;
+        border-bottom: 1px solid #2d2d44;
     }
 
     .lista-tareas {

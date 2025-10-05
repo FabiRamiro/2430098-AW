@@ -397,16 +397,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Al abrir el modal de proyecto nuevo
   document
     .getElementById("modalProyecto")
-    .addEventListener("show.bs.modal", function (e) {
-      if (
-        !e.relatedTarget ||
-        !e.relatedTarget.classList.contains("btn-editar-proyecto")
-      ) {
-        formularioProyecto.reset();
-        document.getElementById("idProyecto").value = "";
-        document.getElementById("tituloModalProyecto").textContent =
-          "Nuevo Proyecto";
-      }
+    .addEventListener("hidden.bs.modal", function () {
+      formularioProyecto.reset();
+      document.getElementById("idProyecto").value = "";
+      document.getElementById("tituloModalProyecto").textContent =
+        "Nuevo Proyecto";
     });
 
   // Guardamos la tarea (creada o editada)
@@ -506,17 +501,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Al abrir el modal de tarea nueva
   document
     .getElementById("modalTarea")
-    .addEventListener("show.bs.modal", function (e) {
-      if (
-        !e.relatedTarget ||
-        !e.relatedTarget.classList.contains("btn-editar-tarea")
-      ) {
-        formularioTarea.reset();
-        document.getElementById("idTarea").value = "";
-        document.getElementById("tituloModalTarea").textContent = "Nueva Tarea";
-        // Llenamos el correo del usuario actual
-        document.getElementById("asignadoATarea").value = usuarioActivo;
-      }
+    .addEventListener("hidden.bs.modal", function () {
+      formularioTarea.reset();
+      document.getElementById("idTarea").value = "";
+      document.getElementById("tituloModalTarea").textContent = "Nueva Tarea";
+      // Llenamos el correo del usuario actual
+      document.getElementById("asignadoATarea").value = usuarioActivo;
     });
 
   // ===== AL INICIALIZAR =====
@@ -531,6 +521,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Configuramos las zonas de drop para drag & drop
   configurarZonasDrop();
+
+  document
+    .querySelector('[data-bs-target="#modalProyecto"]')
+    .addEventListener("click", function () {
+      formularioProyecto.reset();
+      document.getElementById("idProyecto").value = "";
+      document.getElementById("tituloModalProyecto").textContent =
+        "Nuevo Proyecto";
+    });
 
   // Mostramos los proyectos al cargar
   mostrarProyectos();
