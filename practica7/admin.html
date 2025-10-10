@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Administrador</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row min-vh-100">
+        <!-- Barra lateral para la navegacion -->
+        <div class="col-md-2 bg-light p-4">
+          <h4 class="mb-4">Admin Panel</h4>
+
+          <div class="list-group">
+            <button
+              class="list-group-item list-group-item-action active"
+              data-seccion="usuarios"
+            >
+              Usuarios
+            </button>
+            <button
+              class="list-group-item list-group-item-action"
+              data-seccion="proyectos"
+            >
+              Proyectos
+            </button>
+            <button
+              class="list-group-item list-group-item-action"
+              data-seccion="tareas"
+            >
+              Tareas
+            </button>
+            <button
+              class="list-group-item list-group-item-action"
+              data-seccion="notas"
+            >
+              Notas
+            </button>
+          </div>
+
+          <hr class="my-4" />
+
+          <a href="index.html" class="btn btn-primary w-100 mb-2">
+            Ver Mi Dashboard
+          </a>
+          <button id="btnCerrarSesion" class="btn btn-danger w-100">
+            Cerrar Sesión
+          </button>
+        </div>
+
+        <!-- Home -->
+        <div class="col-md-10 p-4">
+          <div class="text-end mb-3">
+            <span class="me-3 bienvenida">
+              Admin: <strong id="correoUsuario" class="text-primary"></strong>
+            </span>
+          </div>
+
+          <!-- Seccion de los Usuarios -->
+          <div id="seccionUsuarios" class="seccion-admin">
+            <h3 class="mb-4">Gestión de Usuarios</h3>
+            <div id="listaUsuarios"></div>
+          </div>
+
+          <!-- Seccion de los Proyectos -->
+          <div id="seccionProyectos" class="seccion-admin d-none">
+            <h3 class="mb-4">Gestión de Proyectos</h3>
+            <button class="btn btn-success mb-3" id="btnAgregarProyecto">
+              + Nuevo Proyecto
+            </button>
+            <div id="listaProyectos"></div>
+          </div>
+
+          <!-- Seccion de las Tareas -->
+          <div id="seccionTareas" class="seccion-admin d-none">
+            <h3 class="mb-4">Gestión de Tareas</h3>
+            <button class="btn btn-success mb-3" id="btnAgregarTarea">
+              + Nueva Tarea
+            </button>
+            <div id="listaTareas"></div>
+          </div>
+
+          <!-- Seccion de las Notas -->
+          <div id="seccionNotas" class="seccion-admin d-none">
+            <h3 class="mb-4">Gestión de Notas</h3>
+            <button class="btn btn-success mb-3" id="btnAgregarNota">
+              + Nueva Nota
+            </button>
+            <div id="listaNotas"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
