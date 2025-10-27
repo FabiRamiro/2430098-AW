@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Calificaciones con JS</title>
+  </head>
+  <body>
+    <h1>Calculadora de Calificaciones con JS</h1>
+    <div class="numMaterias">
+      <label for="numMaterias">Numero de Materias: </label>
+      <input type="number" id="numMaterias" min="1" value="1" />
+      <button onclick="generarCampos()">
+        Crear Campos para Capturar Calificaciones
+      </button>
+    </div>
+
+    <div class="calificaciones-contenedor" id="calificacionesContenedor">
+      <!-- Donde el JS pondra los campos para ingresar las materias -->
+    </div>
+    <button onclick="calcularPromedios()">Calcular Promedios</button>
+
+    <h2>Resultados</h2>
+    <div id="resultados">
+      <!-- Los resultados los generara aqui el JS -->
+    </div>
+
+    <script src="calculadoraCalificaciones.js"></script>
+  </body>
+</html>
