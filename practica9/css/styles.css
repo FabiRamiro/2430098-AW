@@ -1,0 +1,875 @@
+/* ====================================
+   LO BÁSICO DE TODO
+   ==================================== */
+:root {
+    --color-principal: #4f46e5;
+    --principal-oscuro: #4338ca;
+    --color-secundario: #06b6d4;
+    --color-exito: #10b981;
+    --color-peligro: #ef4444;
+    --color-advertencia: #f59e0b;
+    --color-oscuro: #1e293b;
+    --color-claro: #f1f5f9;
+    --blanco: #ffffff;
+    --gris-100: #f8fafc;
+    --gris-200: #e2e8f0;
+    --gris-300: #cbd5e1;
+    --gris-600: #475569;
+    --gris-800: #1e293b;
+    --sombra-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --sombra-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --sombra-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --sombra-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --radio-sm: 0.375rem;
+    --radio-md: 0.5rem;
+    --radio-lg: 0.75rem;
+    --transicion: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--gris-100);
+    color: var(--gris-800);
+    line-height: 1.6;
+}
+
+/* ====================================
+   LA PANTALLA DE LOGIN
+   ==================================== */
+.contenedor-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+    padding: 20px;
+}
+
+.tarjeta-login {
+    background: var(--blanco);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-xl);
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+    animation: aparecerArriba 0.6s ease;
+}
+
+.encabezado-login {
+    background: linear-gradient(135deg, var(--color-principal), var(--principal-oscuro));
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: var(--blanco);
+}
+
+.encabezado-login h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.encabezado-login p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.cuerpo-login {
+    padding: 2.5rem 2rem;
+}
+
+.grupo-formulario {
+    margin-bottom: 1.5rem;
+}
+
+.etiqueta-formulario {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--gris-800);
+    font-size: 0.9rem;
+}
+
+.control-formulario {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--gris-200);
+    border-radius: var(--radio-md);
+    font-size: 1rem;
+    transition: var(--transicion);
+}
+
+.control-formulario:focus {
+    outline: none;
+    border-color: var(--color-principal);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.input-con-icono {
+    position: relative;
+}
+
+.input-con-icono i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gris-600);
+}
+
+.input-con-icono .control-formulario {
+    padding-left: 2.75rem;
+}
+
+.boton {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--radio-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.boton-principal {
+    background: var(--color-principal);
+    color: var(--blanco);
+}
+
+.boton-principal:hover {
+    background: var(--principal-oscuro);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-md);
+}
+
+.boton-bloque {
+    width: 100%;
+    display: block;
+}
+
+.boton-lg {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* ====================================
+   EL MENÚ LATERAL Y LO QUE VA ALREDEDOR
+   ==================================== */
+.contenedor-principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+.menu-lateral {
+    width: 260px;
+    background: var(--color-oscuro);
+    color: var(--blanco);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: var(--transicion);
+}
+
+.encabezado-menu-lateral {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.marca-menu-lateral {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--blanco);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.marca-menu-lateral i {
+    font-size: 1.8rem;
+    color: var(--color-secundario);
+}
+
+.lista-menu-lateral {
+    list-style: none;
+    padding: 1rem 0;
+}
+
+.item-menu-lateral {
+    margin: 0.25rem 0;
+}
+
+.enlace-menu-lateral {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transicion);
+    position: relative;
+}
+
+.enlace-menu-lateral:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--blanco);
+}
+
+.enlace-menu-lateral.activo {
+    background: var(--color-principal);
+    color: var(--blanco);
+}
+
+.enlace-menu-lateral.activo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--color-secundario);
+}
+
+.enlace-menu-lateral i {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+.contenido-principal {
+    margin-left: 260px;
+    flex: 1;
+    width: calc(100% - 260px);
+}
+
+.barra-superior {
+    background: var(--blanco);
+    padding: 1rem 2rem;
+    box-shadow: var(--sombra-sm);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.izquierda-barra-superior h2 {
+    font-size: 1.5rem;
+    color: var(--gris-800);
+    font-weight: 700;
+}
+
+.derecha-barra-superior {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.icono-notificacion {
+    position: relative;
+    font-size: 1.3rem;
+    color: var(--gris-600);
+    cursor: pointer;
+    transition: var(--transicion);
+}
+
+.icono-notificacion:hover {
+    color: var(--color-principal);
+}
+
+.insignia-notificacion {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--color-peligro);
+    color: var(--blanco);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-usuario {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--radio-md);
+    transition: var(--transicion);
+}
+
+.perfil-usuario:hover {
+    background: var(--gris-100);
+}
+
+.avatar-usuario {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-principal);
+    color: var(--blanco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.info-usuario span {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.nombre-usuario {
+    font-weight: 600;
+    color: var(--gris-800);
+}
+
+.rol-usuario {
+    color: var(--gris-600);
+    font-size: 0.8rem !important;
+}
+
+.area-contenido {
+    padding: 2rem;
+}
+
+/* ====================================
+   LAS TARJETAS Y COSITAS ASÍ
+   ==================================== */
+.cuadricula-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.tarjeta-estadistica {
+    background: var(--blanco);
+    padding: 1.5rem;
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transicion);
+    border-left: 4px solid var(--color-principal);
+}
+
+.tarjeta-estadistica:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-lg);
+}
+
+.info-estadistica h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gris-800);
+    margin-bottom: 0.25rem;
+}
+
+.info-estadistica p {
+    color: var(--gris-600);
+    font-size: 0.9rem;
+}
+
+.icono-estadistica {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radio-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.tarjeta-estadistica.azul {
+    border-left-color: var(--color-principal);
+}
+
+.tarjeta-estadistica.azul .icono-estadistica {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--color-principal);
+}
+
+.tarjeta-estadistica.verde {
+    border-left-color: var(--color-exito);
+}
+
+.tarjeta-estadistica.verde .icono-estadistica {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-exito);
+}
+
+.tarjeta-estadistica.naranja {
+    border-left-color: var(--color-advertencia);
+}
+
+.tarjeta-estadistica.naranja .icono-estadistica {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-advertencia);
+}
+
+.tarjeta-estadistica.rojo {
+    border-left-color: var(--color-peligro);
+}
+
+.tarjeta-estadistica.rojo .icono-estadistica {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-peligro);
+}
+
+.tarjeta {
+    background: var(--blanco);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-md);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.encabezado-tarjeta {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--gris-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo-tarjeta {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gris-800);
+    margin: 0;
+}
+
+.cuerpo-tarjeta {
+    padding: 1.5rem;
+}
+
+.acciones-tarjeta {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* ====================================
+   LAS TABLAS
+   ==================================== */
+.tabla-responsive {
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla thead {
+    background: var(--gris-100);
+}
+
+.tabla th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--gris-800);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabla td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--gris-200);
+    color: var(--gris-600);
+}
+
+.tabla tbody tr {
+    transition: var(--transicion);
+}
+
+.tabla tbody tr:hover {
+    background: var(--gris-100);
+}
+
+/* ====================================
+   LAS ETIQUETITAS DE COLORES
+   ==================================== */
+.insignia {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.insignia-exito {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-exito);
+}
+
+.insignia-peligro {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-peligro);
+}
+
+.insignia-advertencia {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-advertencia);
+}
+
+.insignia-principal {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--color-principal);
+}
+
+.insignia-secundario {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--color-secundario);
+}
+
+/* ====================================
+   MÁS BOTONES PA TODO
+   ==================================== */
+.boton-exito {
+    background: var(--color-exito);
+    color: var(--blanco);
+}
+
+.boton-exito:hover {
+    background: #059669;
+}
+
+.boton-peligro {
+    background: var(--color-peligro);
+    color: var(--blanco);
+}
+
+.boton-peligro:hover {
+    background: #dc2626;
+}
+
+.boton-advertencia {
+    background: var(--color-advertencia);
+    color: var(--blanco);
+}
+
+.boton-advertencia:hover {
+    background: #d97706;
+}
+
+.boton-secundario {
+    background: var(--gris-600);
+    color: var(--blanco);
+}
+
+.boton-secundario:hover {
+    background: var(--gris-800);
+}
+
+.boton-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.boton-icono {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ====================================
+   LOS FORMULARIOS
+   ==================================== */
+.fila-formulario {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.acciones-formulario {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gris-200);
+}
+
+select.control-formulario {
+    cursor: pointer;
+}
+
+textarea.control-formulario {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ====================================
+   LA VENTANITA QUE APARECE ENCIMA
+   ==================================== */
+.fondo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.fondo-modal.activo {
+    display: flex;
+}
+
+.modal {
+    background: var(--blanco);
+    border-radius: var(--radio-lg);
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--sombra-xl);
+}
+
+.encabezado-modal {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--gris-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo-modal {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gris-800);
+}
+
+.cerrar-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--gris-600);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radio-sm);
+    transition: var(--transicion);
+}
+
+.cerrar-modal:hover {
+    background: var(--gris-100);
+    color: var(--gris-800);
+}
+
+.cuerpo-modal {
+    padding: 1.5rem;
+}
+
+.pie-modal {
+    padding: 1.5rem;
+    border-top: 1px solid var(--gris-200);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+/* ====================================
+   LA BARRITA PARA BUSCAR
+   ==================================== */
+.barra-busqueda {
+    position: relative;
+    max-width: 400px;
+}
+
+.barra-busqueda input {
+    padding-left: 2.5rem;
+}
+
+.barra-busqueda i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gris-600);
+}
+
+/* ====================================
+   CUANDO NO HAY NADA QUE MOSTRAR
+   ==================================== */
+.estado-vacio {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.estado-vacio i {
+    font-size: 4rem;
+    color: var(--gris-300);
+    margin-bottom: 1rem;
+}
+
+.estado-vacio h3 {
+    color: var(--gris-600);
+    margin-bottom: 0.5rem;
+}
+
+.estado-vacio p {
+    color: var(--gris-600);
+}
+
+/* ====================================
+   LAS ANIMACIONES CHIDAS
+   ==================================== */
+@keyframes aparecerArriba {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.aparecer {
+    animation: aparecer 0.5s ease;
+}
+
+/* ====================================
+   PARA QUE SE VEA BIEN EN EL CELU
+   ==================================== */
+@media (max-width: 768px) {
+    .menu-lateral {
+        transform: translateX(-100%);
+    }
+
+    .menu-lateral.activo {
+        transform: translateX(0);
+    }
+
+    .contenido-principal {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .barra-superior {
+        padding: 1rem;
+    }
+
+    .area-contenido {
+        padding: 1rem;
+    }
+
+    .cuadricula-estadisticas {
+        grid-template-columns: 1fr;
+    }
+
+    .fila-formulario {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====================================
+   COSITAS ÚTILES
+   ==================================== */
+.texto-centro {
+    text-align: center;
+}
+
+.texto-derecha {
+    text-align: right;
+}
+
+.texto-izquierda {
+    text-align: left;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
+.mt-2 {
+    margin-top: 1rem;
+}
+
+.mt-3 {
+    margin-top: 1.5rem;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.alinear-items-centro {
+    align-items: center;
+}
+
+.justificar-contenido-entre {
+    justify-content: space-between;
+}
+
+.gap-1 {
+    gap: 0.5rem;
+}
+
+.gap-2 {
+    gap: 1rem;
+}
+
+.gap-3 {
+    gap: 1.5rem;
+}

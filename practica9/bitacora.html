@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bitácora de Usuarios - Expediente Clínico Digital</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="contenedor-principal">
+      <!-- El menu lateral -->
+      <aside class="menu-lateral" id="menuLateral">
+        <div class="encabezado-menu-lateral">
+          <a href="dashboard.html" class="marca-menu-lateral">
+            <i class="fas fa-heartbeat"></i>
+            <span>MediClinic</span>
+          </a>
+        </div>
+        <ul class="lista-menu-lateral">
+          <li class="item-menu-lateral">
+            <a href="dashboard.html" class="enlace-menu-lateral">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="pacientes.html" class="enlace-menu-lateral">
+              <i class="fas fa-users"></i>
+              <span>Pacientes</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="agenda.html" class="enlace-menu-lateral">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Agenda</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="medicos.html" class="enlace-menu-lateral">
+              <i class="fas fa-user-md"></i>
+              <span>Médicos</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="especialidades.html" class="enlace-menu-lateral">
+              <i class="fas fa-stethoscope"></i>
+              <span>Especialidades</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="expedientes.html" class="enlace-menu-lateral">
+              <i class="fas fa-file-medical"></i>
+              <span>Expedientes</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="tarifas.html" class="enlace-menu-lateral">
+              <i class="fas fa-tags"></i>
+              <span>Tarifas</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="pagos.html" class="enlace-menu-lateral">
+              <i class="fas fa-dollar-sign"></i>
+              <span>Pagos</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="reportes.html" class="enlace-menu-lateral">
+              <i class="fas fa-chart-bar"></i>
+              <span>Reportes</span>
+            </a>
+          </li>
+          <li class="item-menu-lateral">
+            <a href="bitacora.html" class="enlace-menu-lateral activo">
+              <i class="fas fa-history"></i>
+              <span>Bitácora</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- El contenido principal -->
+      <div class="contenido-principal">
+        <!-- La barra de arriba -->
+        <nav class="barra-superior">
+          <div class="izquierda-barra-superior">
+            <h2>Bitácora de Usuarios</h2>
+          </div>
+          <div class="derecha-barra-superior">
+            <div class="icono-notificacion">
+              <i class="fas fa-bell"></i>
+              <span class="insignia-notificacion">5</span>
+            </div>
+            <div class="perfil-usuario">
+              <div class="avatar-usuario">FR</div>
+              <div class="info-usuario">
+                <span class="nombre-usuario">Fabi Ramiro</span>
+                <span class="rol-usuario">Administrador</span>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Donde va todo el contenido -->
+        <div class="area-contenido">
+          <!-- Las tarjetas con los numeros -->
+          <div class="cuadricula-estadisticas">
+            <div class="tarjeta-estadistica azul">
+              <div class="info-estadistica">
+                <h3 id="accesosHoy">124</h3>
+                <p>Accesos Hoy</p>
+              </div>
+              <div class="icono-estadistica">
+                <i class="fas fa-sign-in-alt"></i>
+              </div>
+            </div>
+
+            <div class="tarjeta-estadistica verde">
+              <div class="info-estadistica">
+                <h3 id="usuariosActivos">18</h3>
+                <p>Usuarios Activos</p>
+              </div>
+              <div class="icono-estadistica">
+                <i class="fas fa-user-check"></i>
+              </div>
+            </div>
+
+            <div class="tarjeta-estadistica naranja">
+              <div class="info-estadistica">
+                <h3 id="accionesRealizadas">342</h3>
+                <p>Acciones Realizadas</p>
+              </div>
+              <div class="icono-estadistica">
+                <i class="fas fa-tasks"></i>
+              </div>
+            </div>
+
+            <div class="tarjeta-estadistica rojo">
+              <div class="info-estadistica">
+                <h3 id="moduloMasUsado">Pacientes</h3>
+                <p>Módulo Más Usado</p>
+              </div>
+              <div class="icono-estadistica">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Los filtros -->
+          <div class="tarjeta mb-4">
+            <div class="cuerpo-tarjeta">
+              <div class="row align-items-end">
+                <div class="col-md-3">
+                  <label class="etiqueta-formulario">Usuario</label>
+                  <select class="control-formulario" id="filtroUsuario">
+                    <option value="">Todos los usuarios</option>
+                    <option value="1">Fabi Ramiro (Admin)</option>
+                    <option value="2">Dr. García López (Médico)</option>
+                    <option value="3">Ana Recepción (Recepcionista)</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="etiqueta-formulario">Módulo</label>
+                  <select class="control-formulario" id="filtroModulo">
+                    <option value="">Todos los módulos</option>
+                    <option value="dashboard">Dashboard</option>
+                    <option value="pacientes">Pacientes</option>
+                    <option value="agenda">Agenda</option>
+                    <option value="medicos">Médicos</option>
+                    <option value="expedientes">Expedientes</option>
+                    <option value="pagos">Pagos</option>
+                    <option value="tarifas">Tarifas</option>
+                    <option value="reportes">Reportes</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label class="etiqueta-formulario">Fecha Desde</label>
+                  <input
+                    type="date"
+                    class="control-formulario"
+                    id="fechaDesdeBitacora"
+                  />
+                </div>
+                <div class="col-md-2">
+                  <label class="etiqueta-formulario">Fecha Hasta</label>
+                  <input
+                    type="date"
+                    class="control-formulario"
+                    id="fechaHastaBitacora"
+                  />
+                </div>
+                <div class="col-md-2">
+                  <label class="etiqueta-formulario">&nbsp;</label>
+                  <button
+                    class="boton boton-principal w-100"
+                    id="botonFiltrarBitacora"
+                  >
+                    <i class="fas fa-filter me-2"></i>Filtrar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Usuarios en linea -->
+          <div class="row mb-4">
+            <div class="col-lg-4">
+              <div class="tarjeta">
+                <div class="encabezado-tarjeta">
+                  <h3 class="titulo-tarjeta">Usuarios en Línea</h3>
+                </div>
+                <div class="cuerpo-tarjeta">
+                  <div class="lista-usuario" id="usuariosEnLinea">
+                    <div
+                      class="d-flex align-items-center mb-3 pb-3"
+                      style="border-bottom: 1px solid var(--gris-200)"
+                    >
+                      <div class="avatar-usuario me-3">FR</div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Fabi Ramiro</h6>
+                        <small class="text-muted">Administrador</small>
+                      </div>
+                      <span class="insignia insignia-exito">En línea</span>
+                    </div>
+                    <div
+                      class="d-flex align-items-center mb-3 pb-3"
+                      style="border-bottom: 1px solid var(--gris-200)"
+                    >
+                      <div
+                        class="avatar-usuario me-3"
+                        style="background: var(--color-exito)"
+                      >
+                        DG
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Dr. García</h6>
+                        <small class="text-muted">Médico</small>
+                      </div>
+                      <span class="insignia insignia-exito">En línea</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <div
+                        class="avatar-usuario me-3"
+                        style="background: var(--color-advertencia)"
+                      >
+                        AR
+                      </div>
+                      <div class="flex-grow-1">
+                        <h6 class="mb-0">Ana Recepción</h6>
+                        <small class="text-muted">Recepcionista</small>
+                      </div>
+                      <span class="insignia insignia-exito">En línea</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-8">
+              <div class="tarjeta">
+                <div class="encabezado-tarjeta">
+                  <h3 class="titulo-tarjeta">Actividad por Módulo</h3>
+                </div>
+                <div class="cuerpo-tarjeta">
+                  <canvas id="graficoActividadModulos" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- La tabla de bitacora -->
+          <div class="tarjeta">
+            <div class="encabezado-tarjeta">
+              <h3 class="titulo-tarjeta">Registro de Actividad</h3>
+              <div class="acciones-tarjeta">
+                <button class="boton boton-sm boton-exito">
+                  <i class="fas fa-file-excel me-2"></i>Exportar
+                </button>
+              </div>
+            </div>
+            <div class="cuerpo-tarjeta">
+              <div class="tabla-responsive">
+                <table class="tabla">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Fecha y Hora</th>
+                      <th>Usuario</th>
+                      <th>Rol</th>
+                      <th>Módulo</th>
+                      <th>Acción Realizada</th>
+                      <th>Detalles</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cuerpoBitacoraTabla">
+                    <tr>
+                      <td>#BIT-001</td>
+                      <td>05/11/2025 09:15:23</td>
+                      <td>Fabi Ramiro</td>
+                      <td>
+                        <span class="insignia insignia-peligro">Admin</span>
+                      </td>
+                      <td>
+                        <span class="insignia insignia-principal"
+                          >Pacientes</span
+                        >
+                      </td>
+                      <td>Nuevo registro de paciente</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-002</td>
+                      <td>05/11/2025 09:30:45</td>
+                      <td>Dr. Lopez</td>
+                      <td>
+                        <span class="insignia insignia-exito">Medico</span>
+                      </td>
+                      <td>
+                        <span class="insignia insignia-advertencia"
+                          >Expedientes</span
+                        >
+                      </td>
+                      <td>Consulta medica registrada</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-003</td>
+                      <td>05/11/2025 10:00:12</td>
+                      <td>Ana</td>
+                      <td>
+                        <span class="insignia insignia-secundario"
+                          >Recepcionista</span
+                        >
+                      </td>
+                      <td>
+                        <span class="insignia insignia-principal">Agenda</span>
+                      </td>
+                      <td>Cita programada</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-004</td>
+                      <td>05/11/2025 10:15:34</td>
+                      <td>Fabi Ramiro</td>
+                      <td>
+                        <span class="insignia insignia-peligro">Admin</span>
+                      </td>
+                      <td>
+                        <span class="insignia insignia-exito">Tarifas</span>
+                      </td>
+                      <td>Actualización de tarifa</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-005</td>
+                      <td>05/11/2025 10:45:22</td>
+                      <td>Ana</td>
+                      <td>
+                        <span class="insignia insignia-secundario"
+                          >Recepcionista</span
+                        >
+                      </td>
+                      <td>
+                        <span class="insignia insignia-advertencia">Pagos</span>
+                      </td>
+                      <td>Pago registrado - $500.00</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-006</td>
+                      <td>05/11/2025 11:20:15</td>
+                      <td>Dr. Lopez</td>
+                      <td>
+                        <span class="insignia insignia-exito">Medico</span>
+                      </td>
+                      <td>
+                        <span class="insignia insignia-advertencia"
+                          >Expedientes</span
+                        >
+                      </td>
+                      <td>Expediente actualizado</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-007</td>
+                      <td>05/11/2025 11:45:08</td>
+                      <td>Fabi Ramiro</td>
+                      <td>
+                        <span class="insignia insignia-peligro">Admin</span>
+                      </td>
+                      <td>
+                        <span class="insignia insignia-principal"
+                          >Reportes</span
+                        >
+                      </td>
+                      <td>Reporte generado - Financiero</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-008</td>
+                      <td>05/11/2025 12:10:33</td>
+                      <td>Ana</td>
+                      <td>
+                        <span class="insignia insignia-secundario"
+                          >Recepcionista</span
+                        >
+                      </td>
+                      <td>
+                        <span class="insignia insignia-principal">Agenda</span>
+                      </td>
+                      <td>Cita confirmada</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-009</td>
+                      <td>05/11/2025 12:35:47</td>
+                      <td>Dra. Ruiz</td>
+                      <td>
+                        <span class="insignia insignia-exito">Medico</span>
+                      </td>
+                      <td>
+                        <span class="insignia insignia-advertencia"
+                          >Expedientes</span
+                        >
+                      </td>
+                      <td>Nueva consulta registrada</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>#BIT-010</td>
+                      <td>05/11/2025 01:00:56</td>
+                      <td>Fabi Ramiro</td>
+                      <td>
+                        <span class="insignia insignia-peligro">Admin</span>
+                      </td>
+                      <td>
+                        <span class="insignia insignia-principal">Medicos</span>
+                      </td>
+                      <td>Medico actualizado - Horarios</td>
+                      <td>
+                        <button
+                          class="boton boton-sm boton-principal boton-icono"
+                          title="Ver Detalles"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Para cambiar de pagina -->
+              <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>
