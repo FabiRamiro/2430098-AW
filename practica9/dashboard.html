@@ -100,13 +100,21 @@
               <i class="fas fa-bell"></i>
               <span class="insignia-notificacion">5</span>
             </div>
-            <div class="perfil-usuario">
-              <div class="avatar-usuario">FR</div>
+            <div class="perfil-usuario" id="perfilUsuario">
+              <div class="avatar-usuario" id="avatarUsuario">FR</div>
               <div class="info-usuario">
-                <span class="nombre-usuario">Fabi Ramiro</span>
-                <span class="rol-usuario">Administrador</span>
+                <span class="nombre-usuario" id="nombreUsuario"
+                  >Fabi Ramiro</span
+                >
+                <span class="rol-usuario" id="rolUsuario">Administrador</span>
               </div>
             </div>
+            <button
+              class="boton boton-sm boton-peligro ms-3"
+              id="btnCerrarSesion"
+            >
+              <i class="fas fa-sign-out-alt"></i> Salir
+            </button>
           </div>
         </nav>
 
@@ -163,7 +171,7 @@
                   <h3 class="titulo-tarjeta">Citas por Mes</h3>
                 </div>
                 <div class="cuerpo-tarjeta">
-                  <canvas id="graficocitas" height="300"></canvas>
+                  <div id="graficocitas"></div>
                 </div>
               </div>
             </div>
@@ -173,7 +181,7 @@
                   <h3 class="titulo-tarjeta">Pacientes por Género</h3>
                 </div>
                 <div class="cuerpo-tarjeta">
-                  <canvas id="graficoGenero"></canvas>
+                  <div id="graficoGenero"></div>
                 </div>
               </div>
             </div>
@@ -295,5 +303,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="js/dashboard.js"></script>
   </body>
 </html>

@@ -1,0 +1,82 @@
+/* ====================================
+   ESTILOS EXCLUSIVOS DE LOGIN
+   ==================================== */
+
+/* Importar variables del archivo principal */
+@import url('styles.css');
+
+.contenedor-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-principal) 0%, var(--color-secundario) 100%);
+    padding: 20px;
+}
+
+.tarjeta-login {
+    background: var(--blanco);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-xl);
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+    animation: aparecerArriba 0.6s ease;
+}
+
+.encabezado-login {
+    background: linear-gradient(135deg, var(--color-principal), var(--principal-oscuro));
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: var(--blanco);
+}
+
+.encabezado-login h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.encabezado-login p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.cuerpo-login {
+    padding: 2.5rem 2rem;
+}
+
+
+.error-mensaje {
+    color: var(--color-peligro);
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 0.25rem;
+    min-height: 20px;
+}
+
+.control-formulario.error {
+    border-color: var(--color-peligro);
+}
+
+.control-formulario.exito {
+    border-color: var(--color-exito);
+}
+
+.mensaje-exito {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-exito);
+    padding: 1rem;
+    border-radius: var(--radio-md);
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-exito);
+}
+
+.mensaje-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-peligro);
+    padding: 1rem;
+    border-radius: var(--radio-md);
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-peligro);
+}
