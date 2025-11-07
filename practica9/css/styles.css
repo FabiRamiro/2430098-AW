@@ -1,5 +1,5 @@
 /* ====================================
-   LO BASICO DE TODO
+    LO BASICO
    ==================================== */
 :root {
     --color-principal: #4f46e5;
@@ -40,7 +40,7 @@ body {
 }
 
 /* ====================================
-   LA PANTALLA DE LOGIN
+    LA PANTALLA DE LOGIN
    ==================================== */
 .grupo-formulario {
     margin-bottom: 1.5rem;
@@ -119,7 +119,7 @@ body {
 }
 
 /* ====================================
-   EL MENÚ LATERAL Y LO QUE VA ALREDEDOR
+    EL MENU LATERAL Y LO QUE VA ALREDEDOR
    ==================================== */
 .contenedor-principal {
     display: flex;
@@ -307,7 +307,7 @@ body {
 }
 
 /* ====================================
-   LAS TARJETAS Y COSITAS ASÍ
+    LAS TARJETAS Y ASI
    ==================================== */
 .cuadricula-estadisticas {
     display: grid;
@@ -430,7 +430,7 @@ body {
 }
 
 /* ====================================
-   LAS TABLAS
+    LAS TABLAS
    ==================================== */
 .tabla-responsive {
     overflow-x: auto;
@@ -470,7 +470,7 @@ body {
 }
 
 /* ====================================
-   LAS ETIQUETITAS DE COLORES
+    LAS ETIQUETAS DE COLORES
    ==================================== */
 .insignia {
     display: inline-block;
@@ -506,7 +506,7 @@ body {
 }
 
 /* ====================================
-   MÁS BOTONES PA TODO
+    BOTONES
    ==================================== */
 .boton-exito {
     background: var(--color-exito);
@@ -559,7 +559,7 @@ body {
 }
 
 /* ====================================
-   LOS FORMULARIOS
+    FORMULARIOPS
    ==================================== */
 .fila-formulario {
     display: grid;
@@ -587,57 +587,39 @@ textarea.control-formulario {
 }
 
 /* ====================================
-   LA VENTANITA QUE APARECE ENCIMA
+    MODALES USANDO BOOTSTRAP
    ==================================== */
-.fondo-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+.modal-personalizada .modal-dialog {
+    max-width: 720px;
 }
 
-.fondo-modal.activo {
-    display: flex;
-}
-
-.modal {
-    background: var(--blanco);
+.modal-personalizada .modal-content {
     border-radius: var(--radio-lg);
-    max-width: 600px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
+    border: none;
     box-shadow: var(--sombra-xl);
+    background: var(--blanco);
 }
 
-.encabezado-modal {
-    padding: 1.5rem;
+.modal-personalizada .modal-header {
     border-bottom: 1px solid var(--gris-200);
-    display: flex;
-    justify-content: space-between;
+    padding: 1.5rem;
     align-items: center;
 }
 
-.titulo-modal {
+.modal-personalizada .modal-title {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--gris-800);
 }
 
-.cerrar-modal {
+.modal-personalizada .cerrar-modal {
     background: none;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--gris-600);
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -645,25 +627,25 @@ textarea.control-formulario {
     transition: var(--transicion);
 }
 
-.cerrar-modal:hover {
+.modal-personalizada .cerrar-modal:hover {
     background: var(--gris-100);
     color: var(--gris-800);
 }
 
-.cuerpo-modal {
+.modal-personalizada .modal-body {
     padding: 1.5rem;
 }
 
-.pie-modal {
-    padding: 1.5rem;
+.modal-personalizada .modal-footer {
     border-top: 1px solid var(--gris-200);
+    padding: 1.5rem;
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
 }
 
 /* ====================================
-   LA BARRITA PARA BUSCAR
+    LA BARRA DE BUSQUEDA
    ==================================== */
 .barra-busqueda {
     position: relative;
@@ -683,7 +665,7 @@ textarea.control-formulario {
 }
 
 /* ====================================
-   CUANDO NO HAY NADA QUE MOSTRAR
+    CUANDO NO HAY NADA QUE MOSTRAR
    ==================================== */
 .estado-vacio {
     text-align: center;
@@ -706,7 +688,7 @@ textarea.control-formulario {
 }
 
 /* ====================================
-   LAS ANIMACIONES CHIDAS
+    LAS ANIMACIONES
    ==================================== */
 @keyframes aparecerArriba {
     from {
@@ -735,7 +717,7 @@ textarea.control-formulario {
 }
 
 /* ====================================
-   PARA QUE SE VEA BIEN EN EL CELU
+    DISEÑO RESPONSIVO
    ==================================== */
 @media (max-width: 768px) {
     .menu-lateral {
@@ -769,7 +751,7 @@ textarea.control-formulario {
 }
 
 /* ====================================
-   COSITAS ÚTILES
+    DEMAS
    ==================================== */
 .texto-centro {
     text-align: center;

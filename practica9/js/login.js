@@ -1,4 +1,4 @@
-// Los usuarios que ya existen
+// Control de acceso del sistema
 var usuariosValidos = [
   {
     usuario: "admin",
@@ -10,119 +10,120 @@ var usuariosValidos = [
     usuario: "doctor",
     password: "doc123",
     rol: "medico",
-    nombre: "Dr. García López",
+    nombre: "Dr. Garcia Lopez",
   },
   {
     usuario: "recepcion",
     password: "rec123",
     rol: "recepcionista",
-    nombre: "Ana Recepción",
+    nombre: "Ana Recepcion",
   },
 ];
 
-// Esperar a que todo cargue
 document.addEventListener("DOMContentLoaded", function () {
-  // Si ya esta logueado, redirigir al dashboard
   if (sessionStorage.getItem("usuarioActual")) {
     window.location.href = "dashboard.html";
     return;
   }
 
-  // Animacion cuando carga la pagina
-  gsap.fromTo(
-    ".tarjeta-login",
-    {
-      y: -50,
-      opacity: 0,
-    },
-    {
-      duration: 0.8,
-      y: 0,
-      opacity: 1,
-      ease: "power3.out",
-    }
-  );
+  if (typeof gsap !== "undefined") {
+    gsap.fromTo(
+      ".tarjeta-login",
+      { y: -50, opacity: 0 },
+      { duration: 0.8, y: 0, opacity: 1, ease: "power3.out" }
+    );
+  }
 
-  // Cuando se envia el formulario
-  document
-    .getElementById("formularioLogin")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      // Limpiar errores anteriores
-      limpiarErrores();
-
-      // Obtener los valores
-      var usuario = document.getElementById("usuario").value;
-      var password = document.getElementById("password").value;
-      var rol = document.getElementById("rol").value;
-
-      // Validar que no esten vacios
-      var hayErrores = false;
-
-      if (usuario === "") {
-        mostrarError("errorUsuario", "El usuario es obligatorio");
-        hayErrores = true;
-      }
-
-      if (password === "") {
-        mostrarError("errorPassword", "La contraseña es obligatoria");
-        hayErrores = true;
-      }
-
-      if (rol === "") {
-        mostrarError("errorRol", "Debes seleccionar un rol");
-        hayErrores = true;
-      }
-
-      if (hayErrores) {
-        return;
-      }
-
-      // Buscar el usuario
-      var usuarioEncontrado = null;
-      for (var i = 0; i < usuariosValidos.length; i++) {
-        if (usuariosValidos[i].usuario === usuario) {
-          usuarioEncontrado = usuariosValidos[i];
-          break;
-        }
-      }
-
-      // Validar credenciales
-      if (!usuarioEncontrado) {
-        mostrarError("errorUsuario", "Usuario no existe");
-        return;
-      }
-
-      if (usuarioEncontrado.password !== password) {
-        mostrarError("errorPassword", "Contraseña incorrecta");
-        return;
-      }
-
-      if (usuarioEncontrado.rol !== rol) {
-        mostrarError("errorRol", "El rol no corresponde a este usuario");
-        return;
-      }
-
-      // Login exitoso - guardar en sessionStorage
-      sessionStorage.setItem(
-        "usuarioActual",
-        JSON.stringify(usuarioEncontrado)
-      );
-
-      // Animar y redirigir
-      gsap.to(".tarjeta-login", {
-        duration: 0.5,
-        scale: 0.9,
-        opacity: 0,
-        ease: "power3.in",
-        onComplete: function () {
-          window.location.href = "dashboard.html";
-        },
+  if (typeof anime !== "undefined") {
+    document.querySelectorAll(".input-con-icono").forEach(function (grupo) {
+      var icono = grupo.querySelector("i");
+      var input = grupo.querySelector(".control-formulario");
+      if (!icono || !input) return;
+      input.addEventListener("focus", function () {
+        anime({
+          targets: icono,
+          scale: [1, 1.15, 1],
+          duration: 350,
+          easing: "easeOutQuad",
+        });
       });
     });
+  }
 
-  // Validacion en tiempo real
+  var formulario = document.getElementById("formularioLogin");
+  formulario.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+    limpiarErrores();
+
+    var usuario = document.getElementById("usuario").value.trim();
+    var password = document.getElementById("password").value;
+    var rol = document.getElementById("rol").value;
+
+    var errores = [];
+
+    if (!usuario) {
+      mostrarError("errorUsuario", "El usuario es obligatorio");
+      errores.push("Ingresa tu usuario");
+    }
+
+    if (!password) {
+      mostrarError("errorPassword", "La contrasena es obligatoria");
+      errores.push("Ingresa tu contrasena");
+    }
+
+    if (!rol) {
+      mostrarError("errorRol", "Debes seleccionar un rol");
+      errores.push("Selecciona un rol");
+    }
+
+    if (errores.length) {
+      showAlert("error", errores[0]);
+      return;
+    }
+
+    var usuarioEncontrado = usuariosValidos.find(function (item) {
+      return item.usuario === usuario;
+    });
+
+    if (!usuarioEncontrado) {
+      mostrarError("errorUsuario", "Usuario no existe");
+      showAlert("error", "Usuario no encontrado");
+      return;
+    }
+
+    if (usuarioEncontrado.password !== password) {
+      mostrarError("errorPassword", "Contrasena incorrecta");
+      showAlert("error", "Contrasena incorrecta");
+      return;
+    }
+
+    if (usuarioEncontrado.rol !== rol) {
+      mostrarError("errorRol", "El rol no corresponde a este usuario");
+      showAlert("warning", "Selecciona el rol asignado");
+      return;
+    }
+
+    sessionStorage.setItem("usuarioActual", JSON.stringify(usuarioEncontrado));
+
+    var saludo = usuarioEncontrado.nombre.split(" ")[0];
+
+    showAlert("success", "Bienvenido " + saludo).then(function () {
+      if (typeof gsap !== "undefined") {
+        gsap.to(".tarjeta-login", {
+          duration: 0.45,
+          scale: 0.9,
+          opacity: 0,
+          ease: "power3.in",
+          onComplete: function () {
+            window.location.href = "dashboard.html";
+          },
+        });
+      } else {
+        window.location.href = "dashboard.html";
+      }
+    });
+  });
+
   document.getElementById("usuario").addEventListener("input", function () {
     if (this.value.length > 0) {
       this.classList.remove("error");
@@ -148,43 +149,33 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Funcion para mostrar errores
 function mostrarError(idElemento, mensaje) {
   var elemento = document.getElementById(idElemento);
   elemento.textContent = mensaje;
 
   var input = elemento.previousElementSibling;
-  if (input.classList.contains("input-con-icono")) {
+  if (input && input.classList.contains("input-con-icono")) {
     input = input.querySelector(".control-formulario");
   }
-  input.classList.add("error");
+  if (input) {
+    input.classList.add("error");
+  }
 
-  // Animar el error
-  gsap.fromTo(
-    "#" + idElemento,
-    {
-      x: -10,
-      opacity: 0,
-    },
-    {
-      duration: 0.3,
-      x: 0,
-      opacity: 1,
-      ease: "power2.out",
-    }
-  );
+  if (typeof gsap !== "undefined") {
+    gsap.fromTo(
+      "#" + idElemento,
+      { x: -12, opacity: 0 },
+      { duration: 0.3, x: 0, opacity: 1, ease: "power2.out" }
+    );
+  }
 }
 
-// Funcion para limpiar errores
 function limpiarErrores() {
-  var errores = document.querySelectorAll(".error-mensaje");
-  for (var i = 0; i < errores.length; i++) {
-    errores[i].textContent = "";
-  }
-
-  var inputs = document.querySelectorAll(".control-formulario");
-  for (var i = 0; i < inputs.length; i++) {
-    inputs[i].classList.remove("error");
-    inputs[i].classList.remove("exito");
-  }
+  document.querySelectorAll(".error-mensaje").forEach(function (item) {
+    item.textContent = "";
+  });
+  document.querySelectorAll(".control-formulario").forEach(function (input) {
+    input.classList.remove("error");
+    input.classList.remove("exito");
+  });
 }
