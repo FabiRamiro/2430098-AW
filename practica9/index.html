@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Clinica Mueve el Booty</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/login.css" />
+  </head>
+  <body>
+    <div class="contenedor-login">
+      <div class="row g-0 h-100">
+        <!-- Panel Izquierdo -->
+        <div class="col-lg-6 panel-izquierdo">
+          <div class="contenido-izquierdo">
+            <div class="logo-contenedor">
+              <img
+                src="assets/img/logo-simi.png"
+                alt="Logo Doctor Simi"
+                class="logo-login"
+              />
+              <h2 class="nombre-sistema">EL MEJOR SISTEMA AMOS CBRON</h2>
+              <p class="subtitulo">Clinica lo Mismo pero Mas Barato</p>
+            </div>
+
+            <div class="texto-bienvenida">
+              <h1 class="titulo-principal">Un placer verte de nuevo</h1>
+              <p class="descripcion">
+                Ingresa tus credenciales para acceder a nuestro sistema de LO
+                MISMO PERO MAS BARATO AMOS CBRON
+              </p>
+            </div>
+
+            <div class="decoracion-circulo circulo-1"></div>
+            <div class="decoracion-circulo circulo-2"></div>
+            <div class="decoracion-circulo circulo-3"></div>
+          </div>
+        </div>
+
+        <!-- Panel Derecho - Formulario -->
+        <div class="col-lg-6 panel-derecho">
+          <div class="contenido-derecho">
+            <div class="formulario-login">
+              <h3 class="titulo-formulario">Iniciar Sesion</h3>
+              <p class="subtitulo-formulario">
+                Ingresa tu usuario y contraseña YES SIR
+              </p>
+
+              <form id="formulario-login">
+                <div class="mb-4">
+                  <label for="usuario" class="form-label">
+                    <i class="fas fa-user me-2"></i>Usuario
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control input-personalizado"
+                    id="usuario"
+                    placeholder="Ingresa tu usuario"
+                    required
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label for="contrasena" class="form-label">
+                    <i class="fas fa-lock me-2"></i>Contraseña
+                  </label>
+                  <div class="input-group">
+                    <input
+                      type="password"
+                      class="form-control input-personalizado"
+                      id="contrasena"
+                      placeholder="Ingresa tu contraseña"
+                      required
+                    />
+                    <button
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      id="togglePassword"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="mb-4 form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="recordarme"
+                  />
+                  <label class="form-check-label" for="recordarme">
+                    Mantener sesion iniciada
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-principal w-100">
+                  <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+                </button>
+              </form>
+
+              <div class="texto-ayuda mt-4">
+                <p class="mb-0">
+                  ¿Problemas para acceder? Contacta al administrador <br />
+                  Dr. Mario.dev
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="assets/js/utilidades/config-rutas.js"></script>
+    <script src="assets/js/controladores/controlador-login.js"></script>
+  </body>
+</html>
