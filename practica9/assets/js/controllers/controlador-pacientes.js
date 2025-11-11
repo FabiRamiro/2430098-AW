@@ -62,7 +62,6 @@ function mostrarFormularioPaciente(tipo, datos = null) {
     if (datos) {
       document.getElementById("nombre").value = datos.nombre;
       document.getElementById("apellidos").value = datos.apellidos;
-      // Y mas y mas
     }
   }
 
@@ -88,39 +87,62 @@ function mostrarListaPacientes() {
   });
 }
 
-// Guardamos al paciente o bueno, TEORICAMENTE
+// Guardamos a los pacientes utilizando su archivo PHP
 document
   .getElementById("formularioPaciente")
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const datosFormulario = {
-      nombre: document.getElementById("nombre").value,
-      apellidos: document.getElementById("apellidos").value,
-      fechaNacimiento: document.getElementById("fechaNacimiento").value,
-      genero: document.getElementById("genero").value,
-      curp: document.getElementById("curp").value,
-      telefono: document.getElementById("telefono").value,
-      email: document.getElementById("email").value,
-      direccion: document.getElementById("direccion").value,
-      tipoSangre: document.getElementById("tipoSangre").value,
-      alergias: document.getElementById("alergias").value,
-      observaciones: document.getElementById("observaciones").value,
-    };
+    // Creamos el FormData con los datos del formulario
+    const formData = new FormData(this);
 
     mostrarCargando("Guardando paciente");
 
-    setTimeout(() => {
-      cerrarCargando();
-      mostrarExito("Paciente guardado correctamente");
-      mostrarListaPacientes();
-      cargarPacientes();
-    }, 1500);
+    // Enviamos los datos a su archivo PHP
+    fetch("../php/registrar_paciente.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        // Verificamos si la respuesta es exitosa
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        // Primero obtenemos el texto de la respuesta
+        return response.text();
+      })
+      .then((text) => {
+        // Intentamos parsear como JSON
+        try {
+          const data = JSON.parse(text);
+          cerrarCargando();
+
+          if (data.success) {
+            mostrarExito(data.mensaje);
+            mostrarListaPacientes();
+            cargarPacientes();
+          } else {
+            mostrarError(data.mensaje);
+          }
+        } catch (e) {
+          // Si falla el parseo, mostramos el texto recibido para debug
+          console.error("Respuesta del servidor:", text);
+          throw new Error(
+            "La respuesta del servidor no es JSON válido: " +
+              text.substring(0, 100)
+          );
+        }
+      })
+      .catch((error) => {
+        cerrarCargando();
+        mostrarError("Error de conexion con el servidor: " + error.message);
+        console.error("Error completo:", error);
+      });
   });
 
 function cargarPacientes() {
-  // TEORICAMENTE aqui iria el manejamiento con php
-  console.log("...");
+  // Se cargara la lista de pacientes desde PHP
+  console.log("Cargando pacientes...");
 }
 
 function verPaciente(id) {

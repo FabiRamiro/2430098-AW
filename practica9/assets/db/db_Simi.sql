@@ -1,13 +1,8 @@
 -- =============================================
--- Sistema de Base de Datos de MediClinic
+-- Sistema de Base de Datos de Simi
 -- =============================================
 
--- Crear la base de datos
-CREATE DATABASE db_MediClinic;
-GO
-
-USE db_MediClinic;
-GO
+USE db_Simi;
 
 -- =============================================
 -- TABLAS DEL CATALOGO
@@ -15,9 +10,9 @@ GO
 
 -- Tabla de Especialidades
 CREATE TABLE Especialidades (
-    IdEspecialidad          INT IDENTITY(1,1) PRIMARY KEY,
-    NombreEspecialidad      NVARCHAR(100) NOT NULL,
-    Descripcion             NVARCHAR(250),
+    IdEspecialidad          INT AUTO_INCREMENT PRIMARY KEY,
+    NombreEspecialidad      VARCHAR(100) NOT NULL,
+    Descripcion             VARCHAR(250),
     CONSTRAINT UQ_NombreEspecialidad UNIQUE (NombreEspecialidad)
 );
 
@@ -27,49 +22,48 @@ CREATE TABLE Especialidades (
 
 -- Control de Pacientes
 CREATE TABLE ControlPacientes (
-    IdPaciente              INT IDENTITY(1,1) PRIMARY KEY,
-    NombreCompleto          NVARCHAR(150) NOT NULL,
-    CURP                    NVARCHAR(18) UNIQUE,
+    IdPaciente              INT AUTO_INCREMENT PRIMARY KEY,
+    NombreCompleto          VARCHAR(150) NOT NULL,
+    CURP                    VARCHAR(18) UNIQUE,
     FechaNacimiento         DATE NOT NULL,
     Sexo                    CHAR(1) CHECK (Sexo IN ('M', 'F')),
-    Telefono                NVARCHAR(20),
-    CorreoElectronico       NVARCHAR(100),
-    Direccion               NVARCHAR(250),
-    ContactoEmergencia      NVARCHAR(150),
-    TelefonoEmergencia      NVARCHAR(20),
-    Alergias                NVARCHAR(250),
-    AntecedentesMedicos     NVARCHAR(MAX),
-    FechaRegistro           DATETIME DEFAULT GETDATE(),
-    Estatus                 BIT DEFAULT 1, -- 1=Activo, 0=Inactivo
-    CONSTRAINT CHK_CURP_Length CHECK (LEN(CURP) = 18 OR CURP IS NULL)
+    Telefono                VARCHAR(20),
+    CorreoElectronico       VARCHAR(100),
+    Direccion               VARCHAR(250),
+    ContactoEmergencia      VARCHAR(150),
+    TelefonoEmergencia      VARCHAR(20),
+    Alergias                VARCHAR(250),
+    AntecedentesMedicos     TEXT,
+    FechaRegistro           DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Estatus                 BOOLEAN DEFAULT TRUE
 );
 
 -- Control de Medicos
 CREATE TABLE ControlMedicos (
-    IdMedico                INT IDENTITY(1,1) PRIMARY KEY,
-    NombreCompleto          NVARCHAR(150) NOT NULL,
-    CedulaProfesional       NVARCHAR(50) UNIQUE NOT NULL,
+    IdMedico                INT AUTO_INCREMENT PRIMARY KEY,
+    NombreCompleto          VARCHAR(150) NOT NULL,
+    CedulaProfesional       VARCHAR(50) UNIQUE NOT NULL,
     EspecialidadId          INT NOT NULL,
-    Telefono                NVARCHAR(20),
-    CorreoElectronico       NVARCHAR(100),
-    HorarioAtencion         NVARCHAR(100),
-    FechaIngreso            DATETIME DEFAULT GETDATE(),
-    Estatus                 BIT DEFAULT 1,
+    Telefono                VARCHAR(20),
+    CorreoElectronico       VARCHAR(100),
+    HorarioAtencion         VARCHAR(100),
+    FechaIngreso            DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Estatus                 BOOLEAN DEFAULT TRUE,
     CONSTRAINT FK_Medico_Especialidad FOREIGN KEY (EspecialidadId)
         REFERENCES Especialidades(IdEspecialidad)
 );
 
 -- Control de Agenda (Citas)
 CREATE TABLE ControlAgenda (
-    IdCita                  INT IDENTITY(1,1) PRIMARY KEY,
+    IdCita                  INT AUTO_INCREMENT PRIMARY KEY,
     IdPaciente              INT NOT NULL,
     IdMedico                INT NOT NULL,
     FechaCita               DATETIME NOT NULL,
-    MotivoConsulta          NVARCHAR(250),
-    EstadoCita              NVARCHAR(20) DEFAULT 'Programada'
+    MotivoConsulta          VARCHAR(250),
+    EstadoCita              VARCHAR(20) DEFAULT 'Programada'
         CHECK (EstadoCita IN ('Programada', 'Cancelada', 'Atendida', 'En Proceso', 'No Asistió')),
-    Observaciones           NVARCHAR(250),
-    FechaRegistro           DATETIME DEFAULT GETDATE(),
+    Observaciones           VARCHAR(250),
+    FechaRegistro           DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT FK_Cita_Paciente FOREIGN KEY (IdPaciente)
         REFERENCES ControlPacientes(IdPaciente),
     CONSTRAINT FK_Cita_Medico FOREIGN KEY (IdMedico)
@@ -78,16 +72,16 @@ CREATE TABLE ControlAgenda (
 
 -- Expediente Clinico
 CREATE TABLE ExpedienteClinico (
-    IdExpediente            INT IDENTITY(1,1) PRIMARY KEY,
+    IdExpediente            INT AUTO_INCREMENT PRIMARY KEY,
     IdPaciente              INT NOT NULL,
     IdMedico                INT NOT NULL,
-    IdCita                  INT NULL, -- Relacionamos con la cita que genero este expediente
-    FechaConsulta           DATETIME NOT NULL DEFAULT GETDATE(),
-    Sintomas                NVARCHAR(MAX),
-    Diagnostico             NVARCHAR(MAX),
-    Tratamiento             NVARCHAR(MAX),
-    RecetaMedica            NVARCHAR(MAX),
-    NotasAdicionales        NVARCHAR(MAX),
+    IdCita                  INT NULL,
+    FechaConsulta           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Sintomas                TEXT,
+    Diagnostico             TEXT,
+    Tratamiento             TEXT,
+    RecetaMedica            TEXT,
+    NotasAdicionales        TEXT,
     ProximaCita             DATETIME NULL,
     CONSTRAINT FK_Expediente_Paciente FOREIGN KEY (IdPaciente)
         REFERENCES ControlPacientes(IdPaciente),
@@ -103,25 +97,25 @@ CREATE TABLE ExpedienteClinico (
 
 -- Gestor de Tarifas
 CREATE TABLE GestorTarifas (
-    IdTarifa                INT IDENTITY(1,1) PRIMARY KEY,
-    DescripcionServicio     NVARCHAR(150) NOT NULL,
+    IdTarifa                INT AUTO_INCREMENT PRIMARY KEY,
+    DescripcionServicio     VARCHAR(150) NOT NULL,
     CostoBase               DECIMAL(10,2) NOT NULL CHECK (CostoBase >= 0),
-    EspecialidadId          INT NULL, -- Permite tarifas generales o por especialidad
-    Estatus                 BIT DEFAULT 1,
+    EspecialidadId          INT NULL,
+    Estatus                 BOOLEAN DEFAULT TRUE,
     CONSTRAINT FK_Tarifa_Especialidad FOREIGN KEY (EspecialidadId)
         REFERENCES Especialidades(IdEspecialidad)
 );
 
 -- Gestor de Pagos
 CREATE TABLE GestorPagos (
-    IdPago                  INT IDENTITY(1,1) PRIMARY KEY,
+    IdPago                  INT AUTO_INCREMENT PRIMARY KEY,
     IdCita                  INT NOT NULL,
     IdPaciente              INT NOT NULL,
     Monto                   DECIMAL(10,2) NOT NULL CHECK (Monto >= 0),
-    MetodoPago              NVARCHAR(50) CHECK (MetodoPago IN ('Efectivo', 'Tarjeta', 'Transferencia', 'Cheque')),
-    FechaPago               DATETIME DEFAULT GETDATE(),
-    Referencia              NVARCHAR(100),
-    EstatusPago             NVARCHAR(20) DEFAULT 'Pendiente'
+    MetodoPago              VARCHAR(50) CHECK (MetodoPago IN ('Efectivo', 'Tarjeta', 'Transferencia', 'Cheque')),
+    FechaPago               DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Referencia              VARCHAR(100),
+    EstatusPago             VARCHAR(20) DEFAULT 'Pendiente'
         CHECK (EstatusPago IN ('Pagado', 'Pendiente', 'Cancelado', 'Reembolsado')),
     CONSTRAINT FK_Pago_Cita FOREIGN KEY (IdCita)
         REFERENCES ControlAgenda(IdCita),
@@ -135,40 +129,40 @@ CREATE TABLE GestorPagos (
 
 -- Usuarios del Sistema
 CREATE TABLE UsuariosSistema (
-    IdUsuario               INT IDENTITY(1,1) PRIMARY KEY,
-    Usuario                 NVARCHAR(50) UNIQUE NOT NULL,
-    ContrasenaHash          NVARCHAR(200) NOT NULL,
-    Rol                     NVARCHAR(50) CHECK (Rol IN ('Admin', 'Medico', 'Recepcionista', 'Enfermera')),
-    IdMedico                INT NULL, -- Si el usuario es medico
-    Activo                  BIT DEFAULT 1,
+    IdUsuario               INT AUTO_INCREMENT PRIMARY KEY,
+    Usuario                 VARCHAR(50) UNIQUE NOT NULL,
+    ContrasenaHash          VARCHAR(200) NOT NULL,
+    Rol                     VARCHAR(50) CHECK (Rol IN ('Admin', 'Medico', 'Recepcionista', 'Enfermera')),
+    IdMedico                INT NULL,
+    Activo                  BOOLEAN DEFAULT TRUE,
     UltimoAcceso            DATETIME,
-    FechaCreacion           DATETIME DEFAULT GETDATE(),
+    FechaCreacion           DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT FK_Usuario_Medico FOREIGN KEY (IdMedico)
         REFERENCES ControlMedicos(IdMedico)
 );
 
 -- Bitacora de Acceso
 CREATE TABLE BitacoraAcceso (
-    IdBitacora              INT IDENTITY(1,1) PRIMARY KEY,
+    IdBitacora              INT AUTO_INCREMENT PRIMARY KEY,
     IdUsuario               INT NOT NULL,
-    FechaAcceso             DATETIME DEFAULT GETDATE(),
-    AccionRealizada         NVARCHAR(250),
-    Modulo                  NVARCHAR(100),
-    DireccionIP             NVARCHAR(50),
+    FechaAcceso             DATETIME DEFAULT CURRENT_TIMESTAMP,
+    AccionRealizada         VARCHAR(250),
+    Modulo                  VARCHAR(100),
+    DireccionIP             VARCHAR(50),
     CONSTRAINT FK_Bitacora_Usuario FOREIGN KEY (IdUsuario)
         REFERENCES UsuariosSistema(IdUsuario)
 );
 
 -- Reportes
 CREATE TABLE Reportes (
-    IdReporte               INT IDENTITY(1,1) PRIMARY KEY,
-    TipoReporte             NVARCHAR(50) CHECK (TipoReporte IN ('Medico', 'Financiero', 'Citas', 'Inventario', 'Auditoria')),
+    IdReporte               INT AUTO_INCREMENT PRIMARY KEY,
+    TipoReporte             VARCHAR(50) CHECK (TipoReporte IN ('Medico', 'Financiero', 'Citas', 'Inventario', 'Auditoria')),
     IdPaciente              INT NULL,
     IdMedico                INT NULL,
-    FechaGeneracion         DATETIME DEFAULT GETDATE(),
-    RutaArchivo             NVARCHAR(250),
-    Descripcion             NVARCHAR(250),
-    GeneradoPor             NVARCHAR(100),
+    FechaGeneracion         DATETIME DEFAULT CURRENT_TIMESTAMP,
+    RutaArchivo             VARCHAR(250),
+    Descripcion             VARCHAR(250),
+    GeneradoPor             VARCHAR(100),
     CONSTRAINT FK_Reporte_Paciente FOREIGN KEY (IdPaciente)
         REFERENCES ControlPacientes(IdPaciente),
     CONSTRAINT FK_Reporte_Medico FOREIGN KEY (IdMedico)

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medicos - Clinica Lo Mismo Pero Mas Barato</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/estilos-globales.css" />
+
+  <style>
+    .tarjeta-medico {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      height: 100%;
+    }
+
+    .tarjeta-medico:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .foto-medico {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,
+          var(--color-principal),
+          var(--color-secundario));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1rem;
+    }
+
+    .nombre-medico {
+      color: var(--color-principal);
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .especialidad-medico {
+      color: var(--color-texto-claro);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .info-medico {
+      font-size: 0.9rem;
+      color: var(--color-texto);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-medico i {
+      color: var(--color-principal);
+      width: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay" id="overlay"></div>
+
+  <nav class="navegacion-lateral" id="navegacionLateral">
+    <div class="encabezado-lateral">
+      <button class="btn-cerrar-lateral" id="btnCerrarLateral">
+        <i class="fas fa-times"></i>
+      </button>
+      <h3>Menu</h3>
+    </div>
+    <ul class="menu-lateral">
+      <li class="item-menu-lateral">
+        <a href="dashboard.html" class="enlace-menu-lateral">
+          <i class="fas fa-home"></i><span>Dashboard</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="pacientes.php" class="enlace-menu-lateral">
+          <i class="fas fa-user-injured"></i><span>Pacientes</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="agenda.html" class="enlace-menu-lateral">
+          <i class="fas fa-calendar-alt"></i><span>Agenda</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="medicos.php" class="enlace-menu-lateral activo">
+          <i class="fas fa-user-md"></i><span>Medicos</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="reportes.html" class="enlace-menu-lateral">
+          <i class="fas fa-chart-bar"></i><span>Reportes</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="pagos.html" class="enlace-menu-lateral">
+          <i class="fas fa-credit-card"></i><span>Pagos</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="tarifas.html" class="enlace-menu-lateral">
+          <i class="fas fa-dollar-sign"></i><span>Tarifas</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="bitacoras.html" class="enlace-menu-lateral">
+          <i class="fas fa-history"></i><span>Bitacoras</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="especialidades.html" class="enlace-menu-lateral">
+          <i class="fas fa-stethoscope"></i><span>Especialidades</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="contenedor-principal">
+    <header class="barra-superior">
+      <div class="contenido-barra">
+        <div class="logo-sistema">
+          <button class="btn-toggle-menu" id="btnToggleMenu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <img
+            src="../assets/img/logo-simi.png"
+            alt="Logo"
+            class="logo-imagen" />
+          <h1>Clinica Lo Mismo Pero Mas Barato</h1>
+        </div>
+        <div class="info-usuario">
+          <div class="usuario-perfil">
+            <span id="nombreUsuario">Usuario</span>
+            <div class="avatar-usuario">
+              <span id="inicialesUsuario">U</span>
+            </div>
+          </div>
+          <button class="btn-cerrar-sesion" id="btnCerrarSesion">
+            <i class="fas fa-sign-out-alt"></i> Salir
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="contenido-principal">
+      <div
+        class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <h2 class="titulo-seccion mb-0">
+          <i class="fas fa-user-md me-2"></i>Control de Medicos
+        </h2>
+        <button class="btn-primario" id="btnNuevoMedico">
+          <i class="fas fa-plus me-2"></i>Nuevo Medico
+        </button>
+      </div>
+
+      <!-- Vista Lista Medicos -->
+      <div id="vistaListaMedicos">
+        <div class="row mb-3">
+          <div class="col-md-8">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fas fa-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                id="inputBuscarMedico"
+                placeholder="Buscar Medico..." />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <select class="form-select" id="filtroEspecialidad">
+              <option value="">Todas las especialidades</option>
+              <option value="1">Medicina General</option>
+              <option value="2">Cardiologia</option>
+              <option value="3">Pediatria</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row" id="contenedorMedicos">
+          <!-- Tarjeta Medico 1 -->
+          <div class="col-md-4 col-lg-3 mb-4">
+            <div class="tarjeta-medico">
+              <div class="foto-medico">
+                <i class="fas fa-user-md"></i>
+              </div>
+              <h4 class="nombre-medico">Dr. Juan Garcia</h4>
+              <p class="especialidad-medico">Medicina General</p>
+              <div class="info-medico">
+                <i class="fas fa-id-badge"></i>
+                Cedula: 12345678
+              </div>
+              <div class="info-medico">
+                <i class="fas fa-phone"></i>
+                5512345678
+              </div>
+              <div class="info-medico">
+                <i class="fas fa-envelope"></i>
+                dr.garcia@email.com
+              </div>
+              <div class="d-flex gap-2 mt-3">
+                <button
+                  class="btn btn-sm btn-info flex-fill"
+                  onclick="verMedico(1)">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-warning flex-fill"
+                  onclick="editarMedico(1)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-danger flex-fill"
+                  onclick="eliminarMedico(1)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta Medico 2 -->
+          <div class="col-md-4 col-lg-3 mb-4">
+            <div class="tarjeta-medico">
+              <div class="foto-medico">
+                <i class="fas fa-user-md"></i>
+              </div>
+              <h4 class="nombre-medico">Dra. Ana Martinez</h4>
+              <p class="especialidad-medico">Cardiologia</p>
+              <div class="info-medico">
+                <i class="fas fa-id-badge"></i>
+                Cedula: 87654321
+              </div>
+              <div class="info-medico">
+                <i class="fas fa-phone"></i>
+                5587654321
+              </div>
+              <div class="info-medico">
+                <i class="fas fa-envelope"></i>
+                dra.martinez@email.com
+              </div>
+              <div class="d-flex gap-2 mt-3">
+                <button
+                  class="btn btn-sm btn-info flex-fill"
+                  onclick="verMedico(2)">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-warning flex-fill"
+                  onclick="editarMedico(2)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button
+                  class="btn btn-sm btn-danger flex-fill"
+                  onclick="eliminarMedico(2)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vista del Formulario de Medico -->
+      <div id="vistaFormularioMedico" style="display: none">
+        <div class="tarjeta">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="titulo-tarjeta mb-0">
+              <i class="fas fa-user-md"></i>
+              <span id="tituloFormularioMedico">Nuevo Medico</span>
+            </h3>
+            <button class="btn-secundario" id="btnVolverListaMedicos">
+              <i class="fas fa-arrow-left me-2"></i>Volver
+            </button>
+          </div>
+
+          <form id="formularioMedico" method="POST">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-user me-2"></i>Nombre(s)
+                  </label>
+                  <input
+                    type="text"
+                    class="campo-formulario"
+                    id="nombreMedico"
+                    name="nombreMedico"
+                    placeholder="Nombre del Medico"
+                    required />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-user me-2"></i>Apellidos
+                  </label>
+                  <input
+                    type="text"
+                    class="campo-formulario"
+                    id="apellidosMedico"
+                    name="apellidosMedico"
+                    placeholder="Apellidos del Medico"
+                    required />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-id-badge me-2"></i>Cedula Profesional
+                  </label>
+                  <input
+                    type="text"
+                    class="campo-formulario"
+                    id="cedulaMedico"
+                    name="cedulaMedico"
+                    placeholder="Numero de Cedula"
+                    required />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-stethoscope me-2"></i>Especialidad
+                  </label>
+                  <select
+                    class="campo-formulario"
+                    id="especialidadMedico"
+                    name="especialidadMedico"
+                    required>
+                    <option value="">Selecciona...</option>
+                    <option value="1">Medicina General</option>
+                    <option value="2">Cardiologia</option>
+                    <option value="3">Pediatria</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-phone me-2"></i>Telefono
+                  </label>
+                  <input
+                    type="tel"
+                    class="campo-formulario"
+                    id="telefonoMedico"
+                    name="telefonoMedico"
+                    placeholder="10 dígitos"
+                    required />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-envelope me-2"></i>Email
+                  </label>
+                  <input
+                    type="email"
+                    class="campo-formulario"
+                    id="emailMedico"
+                    name="emailMedico"
+                    placeholder="correo@ejemplo.com"
+                    required />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-calendar me-2"></i>Fecha de Ingreso
+                  </label>
+                  <input
+                    type="date"
+                    class="campo-formulario"
+                    id="fechaIngresoMedico"
+                    name="fechaIngresoMedico"
+                    required />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-map-marker-alt me-2"></i>Direccion
+                  </label>
+                  <textarea
+                    class="campo-formulario"
+                    id="direccionMedico"
+                    name="direccionMedico"
+                    rows="2"
+                    placeholder="Direccion completa"></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="grupo-formulario">
+                  <label class="etiqueta-formulario">
+                    <i class="fas fa-comment me-2"></i>Observaciones
+                  </label>
+                  <textarea
+                    class="campo-formulario"
+                    id="observacionesMedico"
+                    name="observacionesMedico"
+                    rows="3"
+                    placeholder="Informacion adicional"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-end mt-4">
+              <button
+                type="button"
+                class="btn-secundario"
+                id="btnCancelarFormMedico">
+                <i class="fas fa-times me-2"></i>Cancelar
+              </button>
+              <button type="submit" class="btn-primario">
+                <i class="fas fa-save me-2"></i>Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <nav class="navegacion-inferior">
+      <ul class="menu-navegacion">
+        <li class="item-menu">
+          <a href="dashboard.html" class="enlace-menu">
+            <i class="fas fa-home"></i><span>Inicio</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="pacientes.php" class="enlace-menu">
+            <i class="fas fa-user-injured"></i><span>Pacientes</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="agenda.html" class="enlace-menu">
+            <i class="fas fa-calendar-alt"></i><span>Agenda</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="medicos.php" class="enlace-menu activo">
+            <i class="fas fa-user-md"></i><span>Medicos</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="reportes.html" class="enlace-menu">
+            <i class="fas fa-chart-bar"></i><span>Reportes</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="pagos.html" class="enlace-menu">
+            <i class="fas fa-credit-card"></i><span>Pagos</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="tarifas.html" class="enlace-menu">
+            <i class="fas fa-dollar-sign"></i><span>Tarifas</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="bitacoras.html" class="enlace-menu">
+            <i class="fas fa-history"></i><span>Bitacoras</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="especialidades.html" class="enlace-menu">
+            <i class="fas fa-stethoscope"></i><span>Especialidades</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <script src="../assets/js/utils/navegacion.js"></script>
+  <script src="../assets/js/utils/validaciones.js"></script>
+  <script src="../assets/js/controllers/controlador-medicos.js"></script>
+</body>
+
+</html>

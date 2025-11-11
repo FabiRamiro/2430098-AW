@@ -100,7 +100,7 @@ formularioLogin.addEventListener("submit", function (e) {
       sessionStorage.setItem("sesionActiva", "true");
 
       // Redireccionamos al dashboard
-      window.location.href = "vistas/dashboard.html";
+      window.location.href = "views/dashboard.html";
     });
   }, 1500);
 });

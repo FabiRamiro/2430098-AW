@@ -98,36 +98,62 @@ function mostrarListaMedicos() {
   });
 }
 
-// TEORICAMENTE guardamos al medico
+// Guardamos al medico utilizando su archivo PHP
 document
   .getElementById("formularioMedico")
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const datosMedico = {
-      nombre: document.getElementById("nombreMedico").value,
-      apellidos: document.getElementById("apellidosMedico").value,
-      cedula: document.getElementById("cedulaMedico").value,
-      especialidad: document.getElementById("especialidadMedico").value,
-      telefono: document.getElementById("telefonoMedico").value,
-      email: document.getElementById("emailMedico").value,
-      fechaIngreso: document.getElementById("fechaIngresoMedico").value,
-      direccion: document.getElementById("direccionMedico").value,
-      observaciones: document.getElementById("observacionesMedico").value,
-    };
+    // Creamos el FormData con los datos del formulario
+    const formData = new FormData(this);
 
     mostrarCargando("Guardando medico");
 
-    setTimeout(() => {
-      cerrarCargando();
-      mostrarExito("Medico guardado correctamente");
-      mostrarListaMedicos();
-      cargarMedicos();
-    }, 1500);
+    // Enviamos los datos a su PHP
+    fetch("../php/registrar_medico.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        // Verificamos si la respuesta es exitosa
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        // Primero obtenemos el texto de la respuesta
+        return response.text();
+      })
+      .then((text) => {
+        // Intentamos parsear como JSON
+        try {
+          const data = JSON.parse(text);
+          cerrarCargando();
+
+          if (data.success) {
+            mostrarExito(data.mensaje);
+            mostrarListaMedicos();
+            cargarMedicos();
+          } else {
+            mostrarError(data.mensaje);
+          }
+        } catch (e) {
+          // Si falla el parseo, mostramos el texto recibido para debug
+          console.error("Respuesta del servidor:", text);
+          throw new Error(
+            "La respuesta del servidor no es JSON válido: " +
+              text.substring(0, 100)
+          );
+        }
+      })
+      .catch((error) => {
+        cerrarCargando();
+        mostrarError("Error de conexion con el servidor: " + error.message);
+        console.error("Error completo:", error);
+      });
   });
 
 function cargarMedicos() {
-  console.log("...");
+  // Cargar la lista de medicos desde PHP
+  console.log("Cargando medicos...");
 }
 
 function verMedico(id) {

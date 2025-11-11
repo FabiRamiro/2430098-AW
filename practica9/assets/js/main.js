@@ -1,4 +1,4 @@
-// Aqui estan las funciones globales y utilidades del sistema
+// Aqui estan las funciones globales y utilidadess del sistema
 
 // Configuraciones globales
 const CONFIG = {
@@ -141,7 +141,7 @@ function mostrarToast(mensaje, tipo = "info") {
 }
 
 // Exportamos para uso global
-window.utilidades = {
+window.utils = {
   formatearMoneda,
   formatearFecha,
   calcularEdad,
