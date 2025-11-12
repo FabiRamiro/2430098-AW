@@ -1,5 +1,5 @@
 <?php
-// COnfiguramos para devolver JSON y capturar errores
+// Configuramos para devolver JSON y capturar errores
 error_reporting(E_ALL);
 ini_set('display_errors', 0); // Que no muestre errores en el output
 header('Content-Type: application/json; charset=utf-8');
@@ -59,7 +59,10 @@ try {
         throw new Exception("Ya existe un medico registrado con esa cedula profesional");
     }
 
-    // Insertamos en la base de datos
+    // Iniciamos transaccion para que si falla algo se revierta todo
+    mysqli_begin_transaction($conexion);
+
+    // Insertamos el medico en la base de datos
     $sql = "INSERT INTO ControlMedicos 
             (NombreCompleto, CedulaProfesional, EspecialidadId, Telefono, 
              CorreoElectronico, FechaIngreso, Estatus) 
@@ -67,17 +70,43 @@ try {
             ('$nombreCompleto', '$cedula', '$especialidad', '$telefono', 
              '$email', '$fechaIngreso', 1)";
 
-    if (mysqli_query($conexion, $sql)) {
-        $medicoId = mysqli_insert_id($conexion);
-        echo json_encode([
-            "success" => true,
-            "mensaje" => "Medico registrado exitosamente",
-            "medicoId" => $medicoId
-        ]);
-    } else {
-        throw new Exception("Error al registrar: " . mysqli_error($conexion));
+    if (!mysqli_query($conexion, $sql)) {
+        throw new Exception("Error al registrar medico: " . mysqli_error($conexion));
     }
+
+    $medicoId = mysqli_insert_id($conexion);
+
+    // Creamos el usuario para el medico
+    // El usuario sera el primer nombre en minusculas
+    $nombreUsuario = strtolower(explode(' ', $nombre)[0] . '.' . explode(' ', $apellidos)[0]);
+    $contrasenaDefault = 'medico123'; // Contrasena por defecto
+    $contrasenaHash = password_hash($contrasenaDefault, PASSWORD_DEFAULT);
+
+    $sqlUsuario = "INSERT INTO UsuariosSistema 
+                   (Usuario, ContrasenaHash, Rol, IdMedico, Activo, FechaCreacion) 
+                   VALUES 
+                   ('$nombreUsuario', '$contrasenaHash', 'Medico', $medicoId, 1, NOW())";
+
+    if (!mysqli_query($conexion, $sqlUsuario)) {
+        // Si falla revertimos la transaccion
+        mysqli_rollback($conexion);
+        throw new Exception("Error al crear usuario del medico: " . mysqli_error($conexion));
+    }
+
+    // Si todo salio bien confirmamos la transaccion
+    mysqli_commit($conexion);
+
+    echo json_encode([
+        "success" => true,
+        "mensaje" => "Medico registrado exitosamente. Usuario: $nombreUsuario, Contrasena: $contrasenaDefault",
+        "medicoId" => $medicoId,
+        "usuario" => $nombreUsuario
+    ]);
 } catch (Exception $e) {
+    // Si hay error revertimos la transaccion
+    if (isset($conexion)) {
+        mysqli_rollback($conexion);
+    }
     echo json_encode([
         "success" => false,
         "mensaje" => $e->getMessage()

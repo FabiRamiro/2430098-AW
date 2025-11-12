@@ -19,15 +19,6 @@ function verificarSesion() {
 }
 
 function inicializarEspecialidades() {
-  anime({
-    targets: ".tarjeta-especialidad",
-    translateY: [80, 0],
-    opacity: [0, 1],
-    delay: anime.stagger(120),
-    duration: 800,
-    easing: "easeOutElastic(1, .5)",
-  });
-
   cargarEspecialidades();
 }
 
@@ -105,27 +96,145 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const datosEspecialidad = {
-      nombre: document.getElementById("nombreEspecialidad").value,
-      icono: document.getElementById("iconoEspecialidad").value,
-      descripcion: document.getElementById("descripcionEspecialidad").value,
-      duracion: document.getElementById("duracionConsultaEspecialidad").value,
-      color: document.getElementById("colorEspecialidad").value,
-      activa: document.getElementById("especialidadActiva").checked,
-    };
+    // Creamos el FormData con los datos del formulario
+    const formData = new FormData(this);
 
     mostrarCargando("Guardando especialidad");
 
-    setTimeout(() => {
-      cerrarCargando();
-      mostrarExito("Especialidad guardada correctamente");
-      mostrarListaEspecialidades();
-      cargarEspecialidades();
-    }, 1500);
+    // Enviamos los datos a su PHP
+    fetch("../php/registrar_especialidad.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((text) => {
+        try {
+          const data = JSON.parse(text);
+          cerrarCargando();
+
+          if (data.success) {
+            mostrarExito(data.mensaje);
+            mostrarListaEspecialidades();
+            cargarEspecialidades();
+          } else {
+            mostrarError(data.mensaje);
+          }
+        } catch (e) {
+          console.error("Respuesta del servidor:", text);
+          throw new Error(
+            "La respuesta del servidor no es JSON valido: " +
+              text.substring(0, 100)
+          );
+        }
+      })
+      .catch((error) => {
+        cerrarCargando();
+        mostrarError("Error de conexion con el servidor: " + error.message);
+        console.error("Error completo:", error);
+      });
   });
 
 function cargarEspecialidades() {
-  console.log("...");
+  mostrarCargando("Cargando especialidades");
+
+  fetch("../php/obtener_especialidades.php")
+    .then((response) => response.json())
+    .then((data) => {
+      cerrarCargando();
+
+      if (data.success) {
+        mostrarEspecialidadesEnGrid(data.especialidades);
+      } else {
+        mostrarError(data.mensaje);
+      }
+    })
+    .catch((error) => {
+      cerrarCargando();
+      mostrarError("Error al cargar especialidades: " + error.message);
+      console.error("Error:", error);
+    });
+}
+
+function mostrarEspecialidadesEnGrid(especialidades) {
+  const contenedor = document.getElementById("contenedorEspecialidades");
+  contenedor.innerHTML = "";
+
+  if (especialidades.length === 0) {
+    contenedor.innerHTML = `
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No hay especialidades registradas
+                </div>
+            </div>
+        `;
+    return;
+  }
+
+  // Iconos predeterminados por especialidad
+  const iconos = {
+    "Medicina General": "fa-user-md",
+    Cardiologia: "fa-heartbeat",
+    Pediatria: "fa-baby",
+    Ginecologia: "fa-female",
+    Traumatologia: "fa-bone",
+    Oftalmologia: "fa-eye",
+    Neurologia: "fa-brain",
+    Odontologia: "fa-tooth",
+  };
+
+  especialidades.forEach((esp) => {
+    const icono = iconos[esp.nombre] || "fa-stethoscope";
+
+    const html = `
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="tarjeta-especialidad">
+                    <div class="icono-especialidad">
+                        <i class="fas ${icono}"></i>
+                    </div>
+                    <h4 class="nombre-especialidad">${esp.nombre}</h4>
+                    <p class="descripcion-especialidad">
+                        ${esp.descripcion}
+                    </p>
+                    <div class="info-especialidad">
+                        <div class="info-item">
+                            <div class="numero">${esp.totalMedicos}</div>
+                            <div class="etiqueta">Medicos</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="numero">${esp.totalPacientes}</div>
+                            <div class="etiqueta">Pacientes</div>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-warning flex-fill" onclick="editarEspecialidad(${esp.id})">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn btn-sm btn-info flex-fill" onclick="verDetalleEspecialidad(${esp.id})">
+                            <i class="fas fa-eye"></i> Ver
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+    contenedor.innerHTML += html;
+  });
+
+  // Animamos las tarjetas
+  anime({
+    targets: ".tarjeta-especialidad",
+    translateY: [80, 0],
+    opacity: [0, 1],
+    delay: anime.stagger(120),
+    duration: 800,
+    easing: "easeOutElastic(1, .5)",
+  });
 }
 
 function editarEspecialidad(id) {
@@ -140,7 +249,6 @@ function editarEspecialidad(id) {
 }
 
 function verDetalleEspecialidad(id) {
-  // AQUI se supone va a ir la llamada a PHP para los detalles
   Swal.fire({
     title: "Detalles de la Especialidad",
     html: `
@@ -151,7 +259,7 @@ function verDetalleEspecialidad(id) {
                 <p><strong>Duracion consulta:</strong> 30 minutos</p>
                 <p><strong>Estado:</strong> Activa</p>
                 <hr>
-                <p><strong>Médicos:</strong></p>
+                <p><strong>Medicos:</strong></p>
                 <ul>
                     <li>Dr. Juan Garcia</li>
                     <li>Dra. Maria Lopez</li>

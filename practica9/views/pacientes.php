@@ -32,7 +32,7 @@
         </a>
       </li>
       <li class="item-menu-lateral">
-        <a href="pacientes.php" class="enlace-menu-lateral activo">
+        <a href="pacientes.php" class="enlace-menu-lateral">
           <i class="fas fa-user-injured"></i><span>Pacientes</span>
         </a>
       </li>
@@ -44,6 +44,11 @@
       <li class="item-menu-lateral">
         <a href="medicos.php" class="enlace-menu-lateral">
           <i class="fas fa-user-md"></i><span>Medicos</span>
+        </a>
+      </li>
+      <li class="item-menu-lateral">
+        <a href="enfermeros.php" class="enlace-menu-lateral activo">
+          <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
         </a>
       </li>
       <li class="item-menu-lateral">
@@ -67,7 +72,7 @@
         </a>
       </li>
       <li class="item-menu-lateral">
-        <a href="especialidades.html" class="enlace-menu-lateral">
+        <a href="especialidades.php" class="enlace-menu-lateral">
           <i class="fas fa-stethoscope"></i><span>Especialidades</span>
         </a>
       </li>
@@ -438,7 +443,7 @@
           </a>
         </li>
         <li class="item-menu">
-          <a href="pacientes.php" class="enlace-menu activo">
+          <a href="pacientes.php" class="enlace-menu">
             <i class="fas fa-user-injured"></i><span>Pacientes</span>
           </a>
         </li>
@@ -450,6 +455,11 @@
         <li class="item-menu">
           <a href="medicos.php" class="enlace-menu">
             <i class="fas fa-user-md"></i><span>Medicos</span>
+          </a>
+        </li>
+        <li class="item-menu">
+          <a href="enfermeros.php" class="enlace-menu activo">
+            <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
           </a>
         </li>
         <li class="item-menu">
@@ -473,7 +483,7 @@
           </a>
         </li>
         <li class="item-menu">
-          <a href="especialidades.html" class="enlace-menu">
+          <a href="especialidades.php" class="enlace-menu">
             <i class="fas fa-stethoscope"></i><span>Especialidades</span>
           </a>
         </li>
