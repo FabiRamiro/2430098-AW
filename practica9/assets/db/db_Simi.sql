@@ -132,13 +132,42 @@ CREATE TABLE UsuariosSistema (
     IdUsuario               INT AUTO_INCREMENT PRIMARY KEY,
     Usuario                 VARCHAR(50) UNIQUE NOT NULL,
     ContrasenaHash          VARCHAR(200) NOT NULL,
-    Rol                     VARCHAR(50) CHECK (Rol IN ('Admin', 'Medico', 'Recepcionista', 'Enfermera')),
+    Rol                     VARCHAR(50) CHECK (Rol IN ('Admin', 'Medico', 'Recepcionista', 'Secretaria', 'Secretario')),
     IdMedico                INT NULL,
+    IdSecretario            INT NULL,
     Activo                  BOOLEAN DEFAULT TRUE,
     UltimoAcceso            DATETIME,
     FechaCreacion           DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT FK_Usuario_Medico FOREIGN KEY (IdMedico)
         REFERENCES ControlMedicos(IdMedico)
+);
+
+-- Control de Secretarios
+CREATE TABLE ControlSecretarios (
+    IdSecretario            INT AUTO_INCREMENT PRIMARY KEY,
+    NombreCompleto          VARCHAR(150) NOT NULL,
+    Telefono                VARCHAR(20),
+    CorreoElectronico       VARCHAR(100),
+    Direccion               VARCHAR(250),
+    FechaIngreso            DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Estatus                 BOOLEAN DEFAULT TRUE,
+    IdUsuario               INT NULL,
+    CONSTRAINT FK_Secretario_Usuario FOREIGN KEY (IdUsuario)
+        REFERENCES UsuariosSistema(IdUsuario)
+);
+
+-- Relación entre Secretarios y Médicos (a su cuidado)
+CREATE TABLE SecretariosMedicos (
+    IdRelacion              INT AUTO_INCREMENT PRIMARY KEY,
+    IdSecretario            INT NOT NULL,
+    IdMedico                INT NOT NULL,
+    FechaAsignacion         DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Estatus                 BOOLEAN DEFAULT TRUE,
+    CONSTRAINT FK_SecMed_Secretario FOREIGN KEY (IdSecretario)
+        REFERENCES ControlSecretarios(IdSecretario),
+    CONSTRAINT FK_SecMed_Medico FOREIGN KEY (IdMedico)
+        REFERENCES ControlMedicos(IdMedico),
+    CONSTRAINT UQ_Secretario_Medico UNIQUE (IdSecretario, IdMedico)
 );
 
 -- Bitacora de Acceso
@@ -194,3 +223,19 @@ CREATE INDEX IX_Pago_Fecha ON GestorPagos(FechaPago);
 
 CREATE INDEX IX_Bitacora_Fecha ON BitacoraAcceso(FechaAcceso);
 CREATE INDEX IX_Bitacora_Usuario ON BitacoraAcceso(IdUsuario);
+
+-- Indices para Secretarios
+CREATE INDEX IX_Secretario_Nombre ON ControlSecretarios(NombreCompleto);
+CREATE INDEX IX_Secretario_Estatus ON ControlSecretarios(Estatus);
+CREATE INDEX IX_Secretario_Usuario ON ControlSecretarios(IdUsuario);
+
+CREATE INDEX IX_SecMed_Secretario ON SecretariosMedicos(IdSecretario);
+CREATE INDEX IX_SecMed_Medico ON SecretariosMedicos(IdMedico);
+CREATE INDEX IX_SecMed_Estatus ON SecretariosMedicos(Estatus);
+
+-- Agregar FK de IdSecretario en UsuariosSistema (después de crear ControlSecretarios)
+ALTER TABLE UsuariosSistema
+    ADD CONSTRAINT FK_Usuario_Secretario FOREIGN KEY (IdSecretario)
+        REFERENCES ControlSecretarios(IdSecretario);
+
+CREATE INDEX IX_Usuario_Secretario ON UsuariosSistema(IdSecretario);

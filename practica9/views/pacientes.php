@@ -47,8 +47,8 @@
         </a>
       </li>
       <li class="item-menu-lateral">
-        <a href="enfermeros.php" class="enlace-menu-lateral activo">
-          <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+        <a href="secretarios.php" class="enlace-menu-lateral">
+          <i class="fas fa-user-tie"></i><span>Secretarios</span>
         </a>
       </li>
       <li class="item-menu-lateral">
@@ -458,8 +458,8 @@
           </a>
         </li>
         <li class="item-menu">
-          <a href="enfermeros.php" class="enlace-menu activo">
-            <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+          <a href="secretarios.php" class="enlace-menu">
+            <i class="fas fa-user-tie"></i><span>Secretarios</span>
           </a>
         </li>
         <li class="item-menu">

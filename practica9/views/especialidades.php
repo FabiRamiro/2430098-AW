@@ -118,8 +118,8 @@
         </a>
       </li>
       <li class="item-menu-lateral">
-        <a href="enfermeros.php" class="enlace-menu-lateral activo">
-          <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+        <a href="secretarios.php" class="enlace-menu-lateral">
+          <i class="fas fa-user-tie"></i><span>Secretarios</span>
         </a>
       </li>
       <li class="item-menu-lateral">
@@ -495,36 +495,6 @@
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <div class="grupo-formulario">
-                  <label class="etiqueta-formulario">
-                    <i class="fas fa-clock me-2"></i>Duracion de Consulta
-                    (minutos)
-                  </label>
-                  <input
-                    type="number"
-                    class="campo-formulario"
-                    id="duracionConsultaEspecialidad"
-                    name="duracionConsultaEspecialidad"
-                    placeholder="30"
-                    required />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="grupo-formulario">
-                  <label class="etiqueta-formulario">
-                    <i class="fas fa-palette me-2"></i>Color de Identificacion
-                  </label>
-                  <input
-                    type="color"
-                    class="campo-formulario"
-                    id="colorEspecialidad"
-                    name="colorEspecialidad"
-                    value="#00a0e3" />
-                </div>
-              </div>
-
               <div class="col-md-12">
                 <div class="grupo-formulario">
                   <div class="form-check">
@@ -581,8 +551,8 @@
           </a>
         </li>
         <li class="item-menu">
-          <a href="enfermeros.php" class="enlace-menu activo">
-            <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+          <a href="secretarios.php" class="enlace-menu">
+            <i class="fas fa-user-tie"></i><span>Secretarios</span>
           </a>
         </li>
         <li class="item-menu">

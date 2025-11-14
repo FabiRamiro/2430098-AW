@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enfermeros - Clinica Lo Mismo Pero Mas Barato</title>
+    <title>Secretarios - Clinica Lo Mismo Pero Mas Barato</title>
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../assets/css/estilos-globales.css" />
 
     <style>
-        .tarjeta-enfermero {
+        .tarjeta-secretario {
             background: white;
             border-radius: 12px;
             padding: 1.5rem;
@@ -24,12 +24,12 @@
             height: 100%;
         }
 
-        .tarjeta-enfermero:hover {
+        .tarjeta-secretario:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .foto-enfermero {
+        .foto-secretario {
             width: 100px;
             height: 100px;
             border-radius: 50%;
@@ -44,7 +44,7 @@
             margin: 0 auto 1rem;
         }
 
-        .nombre-enfermero {
+        .nombre-secretario {
             color: var(--color-principal);
             font-size: 1.2rem;
             font-weight: 600;
@@ -52,21 +52,39 @@
             margin-bottom: 0.5rem;
         }
 
-        .rol-enfermero {
+        .rol-secretario {
             color: var(--color-texto-claro);
             text-align: center;
             margin-bottom: 1rem;
         }
 
-        .info-enfermero {
+        .info-secretario {
             font-size: 0.9rem;
             color: var(--color-texto);
             margin-bottom: 0.5rem;
         }
 
-        .info-enfermero i {
+        .info-secretario i {
             color: var(--color-principal);
             width: 20px;
+        }
+
+        .medicos-asignados {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .medicos-asignados h6 {
+            font-size: 0.85rem;
+            color: var(--color-principal);
+            margin-bottom: 0.5rem;
+        }
+
+        .lista-medicos {
+            font-size: 0.8rem;
+            color: var(--color-texto);
         }
     </style>
 </head>
@@ -103,8 +121,8 @@
                 </a>
             </li>
             <li class="item-menu-lateral">
-                <a href="enfermeros.php" class="enlace-menu-lateral activo">
-                    <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+                <a href="secretarios.php" class="enlace-menu-lateral activo">
+                    <i class="fas fa-user-tie"></i><span>Secretarios</span>
                 </a>
             </li>
             <li class="item-menu-lateral">
@@ -166,15 +184,15 @@
             <div
                 class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                 <h2 class="titulo-seccion mb-0">
-                    <i class="fas fa-user-nurse me-2"></i>Control de Enfermeros
+                    <i class="fas fa-user-tie me-2"></i>Control de Secretarios
                 </h2>
-                <button class="btn-primario" id="btnNuevoEnfermero">
-                    <i class="fas fa-plus me-2"></i>Nuevo Enfermero
+                <button class="btn-primario" id="btnNuevoSecretario">
+                    <i class="fas fa-plus me-2"></i>Nuevo Secretario/a
                 </button>
             </div>
 
-            <!-- Vista Lista Enfermeros -->
-            <div id="vistaListaEnfermeros">
+            <!-- Vista Lista Secretarios -->
+            <div id="vistaListaSecretarios">
                 <div class="row mb-3">
                     <div class="col-md-8">
                         <div class="input-group">
@@ -184,12 +202,12 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                id="inputBuscarEnfermero"
-                                placeholder="Buscar enfermero..." />
+                                id="inputBuscarSecretario"
+                                placeholder="Buscar secretario/a..." />
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <select class="form-select" id="filtroEstadoEnfermero">
+                        <select class="form-select" id="filtroEstadoSecretario">
                             <option value="">Todos</option>
                             <option value="activo">Activos</option>
                             <option value="inactivo">Inactivos</option>
@@ -197,37 +215,48 @@
                     </div>
                 </div>
 
-                <div class="row" id="contenedorEnfermeros">
-                    <!-- Tarjeta Enfermero de ejemplo -->
+                <div class="row" id="contenedorSecretarios">
+                    <!-- Tarjeta Secretario de ejemplo -->
                     <div class="col-md-4 col-lg-3 mb-4">
-                        <div class="tarjeta-enfermero">
-                            <div class="foto-enfermero">
-                                <i class="fas fa-user-nurse"></i>
+                        <div class="tarjeta-secretario">
+                            <div class="foto-secretario">
+                                <i class="fas fa-user-tie"></i>
                             </div>
-                            <h4 class="nombre-enfermero">Maria Lopez</h4>
-                            <p class="rol-enfermero">Enfermera</p>
-                            <div class="info-enfermero">
+                            <h4 class="nombre-secretario">Maria Lopez</h4>
+                            <p class="rol-secretario">Secretaria</p>
+                            <div class="info-secretario">
                                 <i class="fas fa-user"></i>
                                 Usuario: maria.lopez
                             </div>
-                            <div class="info-enfermero">
+                            <div class="info-secretario">
+                                <i class="fas fa-phone"></i>
+                                Tel: 555-1234
+                            </div>
+                            <div class="info-secretario">
                                 <i class="fas fa-check-circle"></i>
                                 Estado: Activo
+                            </div>
+                            <div class="medicos-asignados">
+                                <h6><i class="fas fa-user-md me-1"></i>Médicos a cargo:</h6>
+                                <div class="lista-medicos">
+                                    • Dr. Juan Pérez<br>
+                                    • Dra. Ana García
+                                </div>
                             </div>
                             <div class="d-flex gap-2 mt-3">
                                 <button
                                     class="btn btn-sm btn-info flex-fill"
-                                    onclick="verEnfermero(1)">
+                                    onclick="verSecretario(1)">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button
                                     class="btn btn-sm btn-warning flex-fill"
-                                    onclick="editarEnfermero(1)">
+                                    onclick="editarSecretario(1)">
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <button
                                     class="btn btn-sm btn-danger flex-fill"
-                                    onclick="eliminarEnfermero(1)">
+                                    onclick="eliminarSecretario(1)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -236,73 +265,161 @@
                 </div>
             </div>
 
-            <!-- Vista del Formulario de Enfermero -->
-            <div id="vistaFormularioEnfermero" style="display: none">
+            <!-- Vista del Formulario de Secretario -->
+            <div id="vistaFormularioSecretario" style="display: none">
                 <div class="tarjeta">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h3 class="titulo-tarjeta mb-0">
-                            <i class="fas fa-user-nurse"></i>
-                            <span id="tituloFormularioEnfermero">Nuevo Enfermero</span>
+                            <i class="fas fa-user-tie"></i>
+                            <span id="tituloFormularioSecretario">Nuevo Secretario/a</span>
                         </h3>
-                        <button class="btn-secundario" id="btnVolverListaEnfermeros">
+                        <button class="btn-secundario" id="btnVolverListaSecretarios">
                             <i class="fas fa-arrow-left me-2"></i>Volver
                         </button>
                     </div>
 
-                    <form id="formularioEnfermero" method="POST">
+                    <form id="formularioSecretario" method="POST">
                         <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="mb-3 text-primary">
+                                    <i class="fas fa-user-circle me-2"></i>Datos Personales
+                                </h5>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="grupo-formulario">
                                     <label class="etiqueta-formulario">
-                                        <i class="fas fa-user me-2"></i>Usuario
+                                        <i class="fas fa-id-card me-2"></i>Nombre Completo *
                                     </label>
                                     <input
                                         type="text"
                                         class="campo-formulario"
-                                        id="usuarioEnfermero"
-                                        name="usuarioEnfermero"
+                                        id="nombreCompletoSecretario"
+                                        name="nombreCompletoSecretario"
+                                        placeholder="Nombre completo del secretario/a"
+                                        required />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="grupo-formulario">
+                                    <label class="etiqueta-formulario">
+                                        <i class="fas fa-phone me-2"></i>Teléfono
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        class="campo-formulario"
+                                        id="telefonoSecretario"
+                                        name="telefonoSecretario"
+                                        placeholder="Número de teléfono" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="grupo-formulario">
+                                    <label class="etiqueta-formulario">
+                                        <i class="fas fa-envelope me-2"></i>Correo Electrónico
+                                    </label>
+                                    <input
+                                        type="email"
+                                        class="campo-formulario"
+                                        id="correoSecretario"
+                                        name="correoSecretario"
+                                        placeholder="correo@ejemplo.com" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="grupo-formulario">
+                                    <label class="etiqueta-formulario">
+                                        <i class="fas fa-home me-2"></i>Dirección
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="campo-formulario"
+                                        id="direccionSecretario"
+                                        name="direccionSecretario"
+                                        placeholder="Dirección completa" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-4">
+                                <h5 class="mb-3 text-primary">
+                                    <i class="fas fa-key me-2"></i>Datos de Acceso al Sistema
+                                </h5>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="grupo-formulario">
+                                    <label class="etiqueta-formulario">
+                                        <i class="fas fa-user me-2"></i>Usuario *
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="campo-formulario"
+                                        id="usuarioSecretario"
+                                        name="usuarioSecretario"
                                         placeholder="Nombre de usuario"
                                         required />
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="grupo-formulario">
                                     <label class="etiqueta-formulario">
-                                        <i class="fas fa-lock me-2"></i>Contrasena
+                                        <i class="fas fa-lock me-2"></i>Contraseña *
                                     </label>
                                     <input
                                         type="password"
                                         class="campo-formulario"
-                                        id="contrasenaEnfermero"
-                                        name="contrasenaEnfermero"
-                                        placeholder="Contrasena del usuario"
+                                        id="contrasenaSecretario"
+                                        name="contrasenaSecretario"
+                                        placeholder="Contraseña del usuario"
                                         required />
                                 </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="grupo-formulario">
+                                    <label class="etiqueta-formulario">
+                                        <i class="fas fa-user-tag me-2"></i>Rol *
+                                    </label>
+                                    <select
+                                        class="campo-formulario"
+                                        id="rolSecretario"
+                                        name="rolSecretario"
+                                        required>
+                                        <option value="">Selecciona el rol...</option>
+                                        <option value="Secretaria">Secretaria</option>
+                                        <option value="Secretario">Secretario</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-4">
+                                <h5 class="mb-3 text-primary">
+                                    <i class="fas fa-user-md me-2"></i>Asignar Médicos a Cargo
+                                </h5>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="grupo-formulario">
                                     <label class="etiqueta-formulario">
-                                        <i class="fas fa-user-tag me-2"></i>Rol
+                                        <i class="fas fa-users-medical me-2"></i>Selecciona los médicos que estarán a cargo
                                     </label>
-                                    <select
-                                        class="campo-formulario"
-                                        id="rolEnfermero"
-                                        name="rolEnfermero"
-                                        required>
-                                        <option value="">Selecciona el rol...</option>
-                                        <option value="Enfermera">Enfermera</option>
-                                        <option value="Enfermero">Enfermero</option>
-                                    </select>
+                                    <div id="listaMedicosAsignar" class="border rounded p-3" style="max-height: 300px; overflow-y: auto;">
+                                        <div class="text-center text-muted">
+                                            <i class="fas fa-spinner fa-spin me-2"></i>Cargando médicos...
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="alert alert-info">
                                     <i class="fas fa-info-circle me-2"></i>
-                                    <strong>Nota:</strong> El usuario y contrasena seran
-                                    utilizados para iniciar sesion en el sistema.
+                                    <strong>Nota:</strong> El usuario y contraseña serán utilizados para iniciar sesión en el sistema.
+                                    Puedes asignar los médicos ahora o hacerlo después desde la edición del secretario.
                                 </div>
                             </div>
                         </div>
@@ -311,7 +428,7 @@
                             <button
                                 type="button"
                                 class="btn-secundario"
-                                id="btnCancelarFormEnfermero">
+                                id="btnCancelarFormSecretario">
                                 <i class="fas fa-times me-2"></i>Cancelar
                             </button>
                             <button type="submit" class="btn-primario">
@@ -346,8 +463,8 @@
                     </a>
                 </li>
                 <li class="item-menu">
-                    <a href="enfermeros.php" class="enlace-menu activo">
-                        <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+                    <a href="secretarios.php" class="enlace-menu activo">
+                        <i class="fas fa-user-tie"></i><span>Secretarios</span>
                     </a>
                 </li>
                 <li class="item-menu">
@@ -385,7 +502,7 @@
 
     <script src="../assets/js/utils/navegacion.js"></script>
     <script src="../assets/js/utils/validaciones.js"></script>
-    <script src="../assets/js/controllers/controlador-enfermeros.js"></script>
+    <script src="../assets/js/controllers/controlador-secretarios.js"></script>
 </body>
 
 </html>

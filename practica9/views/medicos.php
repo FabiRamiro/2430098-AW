@@ -1,3 +1,19 @@
+<?php
+// Incluimos la conexion a la base de datos
+require_once '../config/database.php';
+
+// Obtenemos las especialidades de la base de datos
+$especialidades = [];
+$sql = "SELECT IdEspecialidad, NombreEspecialidad FROM Especialidades ORDER BY NombreEspecialidad ASC";
+$resultado = mysqli_query($conexion, $sql);
+
+if ($resultado) {
+  while ($fila = mysqli_fetch_assoc($resultado)) {
+    $especialidades[] = $fila;
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -103,8 +119,8 @@
         </a>
       </li>
       <li class="item-menu-lateral">
-        <a href="enfermeros.php" class="enlace-menu-lateral activo">
-          <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+        <a href="secretarios.php" class="enlace-menu-lateral">
+          <i class="fas fa-user-tie"></i><span>Secretarios</span>
         </a>
       </li>
       <li class="item-menu-lateral">
@@ -191,9 +207,11 @@
           <div class="col-md-4">
             <select class="form-select" id="filtroEspecialidad">
               <option value="">Todas las especialidades</option>
-              <option value="1">Medicina General</option>
-              <option value="2">Cardiologia</option>
-              <option value="3">Pediatria</option>
+              <?php foreach ($especialidades as $especialidad): ?>
+                <option value="<?php echo $especialidad['IdEspecialidad']; ?>">
+                  <?php echo htmlspecialchars($especialidad['NombreEspecialidad']); ?>
+                </option>
+              <?php endforeach; ?>
             </select>
           </div>
         </div>
@@ -352,9 +370,11 @@
                     name="especialidadMedico"
                     required>
                     <option value="">Selecciona...</option>
-                    <option value="1">Medicina General</option>
-                    <option value="2">Cardiologia</option>
-                    <option value="3">Pediatria</option>
+                    <?php foreach ($especialidades as $especialidad): ?>
+                      <option value="<?php echo $especialidad['IdEspecialidad']; ?>">
+                        <?php echo htmlspecialchars($especialidad['NombreEspecialidad']); ?>
+                      </option>
+                    <?php endforeach; ?>
                   </select>
                 </div>
               </div>
@@ -471,8 +491,8 @@
           </a>
         </li>
         <li class="item-menu">
-          <a href="enfermeros.php" class="enlace-menu activo">
-            <i class="fas fa-user-nurse"></i><span>Enfermeros</span>
+          <a href="secretarios.php" class="enlace-menu">
+            <i class="fas fa-user-tie"></i><span>Secretarios</span>
           </a>
         </li>
         <li class="item-menu">
@@ -514,3 +534,10 @@
 </body>
 
 </html>
+
+<?php
+// Se cierra la conexion a la base de datos
+if (isset($conexion)) {
+  mysqli_close($conexion);
+}
+?>
