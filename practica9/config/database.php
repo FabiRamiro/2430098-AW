@@ -1,8 +1,8 @@
 <?php
 // Configuramos para conectarse a la base de datos
 $servidor = "localhost";    // Servidor
-$usuario = "root";          // Usuario
-$password = "";             // Contraseña
+$usuario = "admin";          // Usuario
+$password = "369b17803fdbd21da0680c8c51c297bd071c8ac9b9f72974";             // Contraseña
 $basedatos = "db_Simi";     // Nombre de la base de datos
 
 // Creamos la conexion
